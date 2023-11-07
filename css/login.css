@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap');
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background: radial-gradient(circle at 15% 10%, #000000 20%, #121927 100%);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    /* Firefox */
+}
+
+.gradient-text {
+    background: linear-gradient(to right, #B0FFFC, #85FCF9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
