@@ -1,0 +1,13 @@
+body {
+    background: black;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    /* Firefox */
+}
