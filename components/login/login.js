@@ -13,6 +13,7 @@ export class Login extends HTMLElement {
     connectedCallback() {
 
     }
+
 }
 
 customElements.define('login-comp', Login)

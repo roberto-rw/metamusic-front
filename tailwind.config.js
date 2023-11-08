@@ -7,6 +7,9 @@ module.exports = {
         darkfont: '#1E1E1E',
         smoke: '#DADADA',
         dblue: '#1B263B',
+        mblack: '#1DB954',
+        mgray: '#282828',
+        darkbg: '#070707'
       }
     }
   },
