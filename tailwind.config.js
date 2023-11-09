@@ -9,7 +9,8 @@ module.exports = {
         dblue: '#1B263B',
         mblack: '#1DB954',
         mgray: '#282828',
-        darkbg: '#070707'
+        darkbg: '#070707',
+        playerbg: '#0A0A0A',
       }
     }
   },
