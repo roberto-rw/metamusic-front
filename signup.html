@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaMusic</title>
+
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+
+    <!-- Include Tailwind CSS -->
+    <link href="./css/login.css" rel="stylesheet">
+    <link href="/tailwind.css" rel="stylesheet">
+    <script type="module" src="components/signup/signup.js"></script>
+</head>
+
+<body>
+    <main
+        class="max-w-md mx-auto my-10 bg-transparent p-5 rounded-md shadow-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+
+        <section class="flex flex-col items-center justify-center mt-8 mb-16 sm:flex-row">
+            <img src="meta-logo.png" alt="Logo" class="h-24 w-auto sm:h-36 " />
+            <h1 class="text-3xl font-bold ml-0 mt-4 text-center gradient-text sm:text-5xl sm:ml-8 sm:mt-0">Meta Music
+            </h1>
+        </section>
+
+        <section class="grid items-center text-center justify-center mb-10">
+            <h2 class="text-2xl font-bold text-white sm:text-3xl">Hi!</h2>
+
+            <div class="flex justify-center"> <!-- Modificado aquí -->
+                <h2 class="text-sm text-smoke">Need an account</h2>
+            </div>
+        </section>
+
+        <signup-comp></signup-comp>
+
+    </main>
+</body>
+
+</html>
