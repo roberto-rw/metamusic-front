@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+
+    <link href="tailwind.css" rel="stylesheet" />
+    <link href="./css/home.css" rel="stylesheet">
+
+    <script type="module" src="home.js"></script>
+</head>
+
+<body class="bg-darkbg">
+    <header-comp></header-comp>
+    <sidebar-comp></sidebar-comp>
+    <div class="pt-28 md:pl-72 2xl:pl-[22rem] p-8">
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-8">
+                <a href="#" class="text-2xl font-bold text-white hover:underline">
+                    My playlists
+                </a>
+                <a href="#" class="uppercase text-sm font-bold tracking-[2px] hover:underline mr-6">
+                    See all
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-6">
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+            </div>
+        </div>
+    </div>
+    <musicplayer-comp></musicplayer-comp>
+</body>
+
+</html>
