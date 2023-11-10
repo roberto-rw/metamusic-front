@@ -10,26 +10,51 @@
     <link href="tailwind.css" rel="stylesheet" />
     <link href="./css/home.css" rel="stylesheet">
 
-    <script type="module" src="/components/sidebar/sidebar.js"></script>
-    <script type="module" src="/components/header/header.js"></script>
+    <script type="module" src="home.js"></script>
 </head>
 
 <body class="bg-darkbg">
     <header-comp></header-comp>
     <sidebar-comp></sidebar-comp>
 
-    <footer class="fixed bottom-0 h-28 w-full bg-playerbg flex items-center justify-center">
-        <button class="mx-4">
-            <img src="previous-icon.png" alt="Back Icon" class="w-6 h-6">
-        </button>
-        <button class="mx-4">
-            <img src="play-icon.png" alt="Play Icon" class="w-10 h-10">
-        </button>
-        <button class="mx-4">
-            <img src="next-icon.png" alt="Forward Icon" class="w-6 h-6">
-        </button>
-    </footer>
+    <div class="pt-28 md:pl-72 2xl:pl-[22rem] p-8">
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-8">
+                <a href="#" class="text-2xl font-bold text-white hover:underline">
+                    Pick up where you left off
+                </a>
+                <a href="#" class="uppercase text-sm font-bold tracking-[2px] hover:underline mr-6">
+                    See all
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+            </div>
+        </div>
+    </div>
+    <div class="pb-24 md:pl-72 2xl:pl-[22rem] p-8">
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-8">
+                <a href="#" class="text-2xl font-bold text-white hover:underline">
+                    coito
+                </a>
+                <a href="#" class="uppercase text-sm font-bold tracking-[2px] hover:underline mr-6">
+                    See all
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+                <playlistcard-comp></playlistcard-comp>
+            </div>
+        </div>
+    </div>
 
+
+
+    <musicplayer-comp></musicplayer-comp>
 </body>
 
 </html>
