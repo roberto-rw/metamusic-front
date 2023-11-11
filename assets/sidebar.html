@@ -1,54 +1,85 @@
 <link href="/tailwind.css" rel="stylesheet" />
 <aside
-    class="bg-gradient-to-r from-slate-900 from-5% to-dblue to-100% fixed top-0 left-0 w-0 md:w-60 xl:w-60 2xl:w-80 h-[calc(100vh-112px)] rounded-lg flex flex-col justify-between shadow-lg">
-    <div class="hidden md:block">
-        <div class="flex justify-center mt-10 mb-3 2xl:mb-10">
-            <img class="w-2/5 2xl:w-40 h-auto" src="meta-logo.png" alt="MetaMusic">
-        </div>
-        <nav class="flex justify-center p-3">
-            <ul>
-                <li class="flex justify-start m-3">
-                    <a href="/home.html"
-                        class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors">
-                        <img src="home-icon.png" alt="Home Icon" class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4">
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li class="flex justify-start m-3">
-                    <a href="#"
-                        class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors">
-                        <img src="search-icon.png" alt="Home Icon" class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4">
-                        <span>Search</span>
-                    </a>
-                </li>
-                <li class="flex justify-start m-3">
-                    <a href="/playlists.html"
-                        class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors">
-                        <img src="playlist-icon.png" alt="Home Icon" class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4">
-                        <span>My playlists</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+  class="bg-gradient-to-r from-slate-900 from-5% to-dblue to-100% relative top-0 left-0 w-0 md:w-60 xl:w-60 2xl:w-80 h-[calc(100vh-112px)] rounded-lg flex flex-col justify-between shadow-lg"
+>
+  <div class="hidden md:block">
+    <div class="flex justify-center mt-10 mb-3 2xl:mb-10">
+      <img class="w-2/5 2xl:w-40 h-auto" src="meta-logo.png" alt="MetaMusic" />
     </div>
-    <div class="hidden md:block">
-        <nav class="flex justify-center p-3">
-            <ul>
-                <li class="flex justify-start m-3">
-                    <a href="#"
-                        class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors">
-                        <img src="settings-icon.png" alt="Home Icon" class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4">
-                        <span>Setings</span>
-                    </a>
-                </li>
-                <li class="flex justify-start m-3">
-                    <a href="login.html"
-                        class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors">
-                        <img src="logout-icon.png" alt="Home Icon" class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4">
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    <nav class="flex justify-center p-3">
+      <ul>
+        <li class="flex justify-start m-3">
+          <a
+            href="/home.html"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="home-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4"
+            />
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="flex justify-start m-3">
+          <a
+            href="#"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="search-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4"
+            />
+            <span>Search</span>
+          </a>
+        </li>
+        <li class="flex justify-start m-3">
+          <a
+            href="/playlists.html"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="playlist-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4"
+            />
+            <span>My playlists</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="hidden md:block">
+    <nav class="flex justify-center p-3">
+      <ul>
+        <li class="flex justify-start m-3">
+          <a
+            href="#"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="settings-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4"
+            />
+            <span>Setings</span>
+          </a>
+        </li>
+        <li class="flex justify-start m-3">
+          <a
+            href="login.html"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="logout-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 mr-4"
+            />
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </aside>

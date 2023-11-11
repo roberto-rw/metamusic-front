@@ -1,4 +1,6 @@
-export class PlaylistCard extends HTMLElement {
+const template = document.createElement('template')
+
+export class HomeContent extends HTMLElement {
     constructor() {
         super()
         this.attachShadow({ mode: 'open' })
@@ -6,14 +8,12 @@ export class PlaylistCard extends HTMLElement {
 
     async connectedCallback() {
         const doc = await this.loadTemplate()
-        this.updateImage(doc)
-        this.updateName(doc)
         this.appendStyles(doc)
         this.appendContent(doc)
     }
 
     async loadTemplate() {
-        const response = await fetch('../assets/playlist-card.html')
+        const template = await fetch('../assets/playlist-card.html')
         const text = await response.text()
         const parser = new DOMParser()
         return parser.parseFromString(text, 'text/html')
@@ -44,4 +44,4 @@ export class PlaylistCard extends HTMLElement {
     }
 }
 
-customElements.define('playlistcard-comp', PlaylistCard)
+customElements.define('content-comp', HomeContent)
