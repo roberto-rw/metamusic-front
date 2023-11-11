@@ -28,12 +28,29 @@ export class Player extends HTMLElement {
         playButton.addEventListener('click', () => this.#togglePlay(audio));
         audio.addEventListener('timeupdate', () => this.#updateProgress(audio, progress));
 
-
         volumeControl.addEventListener('input', () => {
             volumeControl.style.setProperty('--volume-percentage', `${volumeControl.value * 100}%`);
             audio.volume = volumeControl.value;
         });
 
+        document.addEventListener('cardSelected', async (event) => {
+            let playlistId = event.detail.cardId;
+            await this.#getSong(playlistId);
+            audio.src = this.#song.preview;
+            audio.play();
+        });
+    }
+
+    startListening() {
+        let playlistCard = document.querySelector('playlistcard-comp');
+
+        playlistCard.addEventListener('cardSelected', async (event) => {
+            let playlistId = event.detail.cardId;
+            await this.#getSong(playlistId);
+            let audio = this.shadowRoot.getElementById('audio');
+            audio.src = this.#song.preview;
+            audio.play();
+        });
     }
 
     async #getSong(id) {

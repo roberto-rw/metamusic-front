@@ -9,7 +9,7 @@ export class HomeContent extends HTMLElement {
         const html = await response.text();
         const template = document.createElement('template');
         template.innerHTML = html;
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this.shadowRoot.appendChild(template.content.cloneNode(true))
     }
 }
 
