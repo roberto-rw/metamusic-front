@@ -14,29 +14,33 @@
   <body class="bg-darkbg">
     <header-comp></header-comp>
     <sidebar-comp></sidebar-comp>
-    <div class="pt-28 md:pl-72 2xl:pl-[22rem] p-8">
-      <div class="mb-8">
-        <div class="flex items-center justify-between mb-8">
-          <a href="#" class="text-2xl font-bold text-white hover:underline">
-            My playlists
-          </a>
-          <a
-            href="#"
-            class="uppercase text-sm font-bold tracking-[2px] hover:underline mr-6"
+
+    <main class="pb-28">
+      <div class="pt-28 md:pl-72 2xl:pl-[22rem] p-8">
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-8">
+            <a href="#" class="text-2xl font-bold text-white hover:underline">
+              My playlists
+            </a>
+            <a
+              href="#"
+              class="uppercase text-sm font-bold tracking-[2px] hover:underline mr-6"
+            >
+              See all
+            </a>
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-6"
           >
-            See all
-          </a>
-        </div>
-        <div
-          class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-6"
-        >
-          <playlistcard-comp></playlistcard-comp>
-          <playlistcard-comp></playlistcard-comp>
-          <playlistcard-comp></playlistcard-comp>
-          <playlistcard-comp></playlistcard-comp>
+            <playlistcard-comp></playlistcard-comp>
+            <playlistcard-comp></playlistcard-comp>
+            <playlistcard-comp></playlistcard-comp>
+            <playlistcard-comp></playlistcard-comp>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
+
     <musicplayer-comp></musicplayer-comp>
   </body>
 </html>

@@ -1,0 +1,44 @@
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  --volume-percentage: 100%;
+  background: linear-gradient(
+    90deg,
+    #1b263b var(--volume-percentage),
+    #333 var(--volume-percentage)
+  );
+
+  /* Estilos para el thumb en estado normal */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Necesario para aplicar estilos personalizados en WebKit browsers */
+    appearance: none;
+    width: 20px; /* Tamaño del thumb */
+    height: 20px; /* Tamaño del thumb */
+    background: #1b263b; /* Color del thumb */
+    cursor: pointer; /* Cursor al pasar el mouse sobre el thumb */
+    border-radius: 50%; /* Hace que el thumb sea circular */
+    opacity: 0.01;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Estilos para el thumb en estado normal en otros navegadores */
+  &::-moz-range-thumb {
+    width: 15px; /* Tamaño del thumb */
+    height: 15px; /* Tamaño del thumb */
+    background: #1b263b; /* Color del thumb */
+    cursor: pointer; /* Cursor al pasar el mouse sobre el thumb */
+    border: none;
+    border-radius: 50%; /* Hace que el thumb sea circular */
+    opacity: 0.01;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    &::-webkit-slider-thumb {
+      opacity: 1;
+    }
+    &::-moz-range-thumb {
+      opacity: 1;
+    }
+  }
+}
