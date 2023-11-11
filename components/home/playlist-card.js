@@ -13,7 +13,7 @@ export class PlaylistCard extends HTMLElement {
     }
 
     async loadTemplate() {
-        const response = await fetch('../assets/playlist-card.html')
+        const response = await fetch('../assets/home/playlist-card.html')
         const text = await response.text()
         const parser = new DOMParser()
         return parser.parseFromString(text, 'text/html')
