@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Song</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+
+    <link href="tailwind.css" rel="stylesheet" />
+    <link href="./css/home.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <script type="module" src="home.js"></script>
+</head>
+<body>
+
+    <div class="flex gap-10 flex-grow min-h-screen">
+      <sidebar-comp class=""></sidebar-comp>
+      <div class="flex flex-col w-full">
+        <header class="flex items-center h-20 mt-9">
+            <searchbar-comp class="w-3/4"></searchbar-comp>
+        </header>
+        <h2>Recent searches</h2>
+        <songcard-comp></songcard-comp>
+        <songcard-comp></songcard-comp>
+        <songcard-comp></songcard-comp>
+        <songcard-comp></songcard-comp>
+      </div>
+    </div>
+</body>
+</html>
