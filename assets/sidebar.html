@@ -16,43 +16,46 @@
         <li class="flex md:justify-center xl:justify-start m-3">
           <a
             draggable="false"
-            href="/home.html"
+            href="/home"
+            onclick="route(event)"
             class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
           >
             <img
               src="home-icon.png"
               alt="Home Icon"
-              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4 pointer-events-none"
             />
-            <span class="hidden xl:block">Home</span>
+            <h1 class="hidden xl:block pointer-events-none">Home</h1>
           </a>
         </li>
         <li class="flex md:justify-center xl:justify-start m-3">
           <a
-            href="../searchsong.html"
             class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
           >
             <img
               draggable="false"
               src="search-icon.png"
               alt="Home Icon"
-              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4 pointer-events-none"
             />
-            <span class="hidden xl:block">Search</span>
+            <span class="hidden xl:block pointer-events-none">Search</span>
           </a>
         </li>
         <li class="flex md:justify-center xl:justify-start m-3">
           <a
             draggable="false"
-            href="/playlists.html"
+            href="/playlists"
+            onclick="route(event)"
             class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
           >
             <img
               src="playlist-icon.png"
               alt="Home Icon"
-              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4 pointer-events-none"
             />
-            <span class="hidden xl:block">My playlists</span>
+            <span class="hidden xl:block pointer-events-none"
+              >My playlists</span
+            >
           </a>
         </li>
       </ul>
