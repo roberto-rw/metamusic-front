@@ -1,0 +1,58 @@
+<link href="/tailwind.css" rel="stylesheet" />
+
+<div class="h-screen bg-cover bg-center relative" style="background-image: url('https://i1.sndcdn.com/artworks-61340eb1-4b14-463e-96b2-9ba3c81441ab-0-t500x500.jpg');">
+    <div class="h-4/5 relative">
+        <div class="absolute inset-x-0 bottom-0 mb-10 ml-10">
+            <h1 class="text-white text-4xl font-bold">Milo J: Bzrp  Music Sessions, Vol. 57</h1>
+            <p class="text-white text-2xl">Bizarrap, Milo J</p>
+        </div>
+    </div>
+
+<div class="h-1/5 flex items-center justify-center"> 
+    <div class="h-full w-full bg-black">
+    <audio id="audio" src="test.mp3"></audio>
+    <div class="flex w-full h-full px-10">
+        <div class="flex flex-col items-center justify-center w-full sm:w-full">
+        <div class="flex items-center justify-center">
+            <button class="mx-4">
+            <img
+                src="/public/previous.svg"
+                alt="Back Icon"
+            />
+            </button>
+            <button class=" bg-blue-500 text-white rounded-full p-4 my-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 lg:h-6 lg:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 2v20l18-10L6 2z" />
+                    </svg>
+            </button>
+            <button class="mx-4">
+            <img
+                src="/public/next.svg"
+                alt="Forward Icon"
+            />
+            </button>
+        </div>
+        <div class="mt-2 w-full h-1 rounded-full bg-darkfont">
+            <div
+            id="progress"
+            class="h-full rounded-full bg-dblue transition-all duration-500"
+            style="width: 0%"
+            ></div>
+        </div>
+        </div>
+        <div class="items-center justify-end hidden sm:flex ml-10">
+            <div id="volume-bar" class="volume-bar"></div>
+            <input
+                type="range"
+                id="volume"
+                name="volume"
+                min="0"
+                max="1"
+                step="0.01"
+                value="1"
+                class="w-24 h-1 sm:w-20 rounded-full"
+            />
+        </div>
+    </div>
+</div>
+</div>

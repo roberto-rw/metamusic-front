@@ -6,4 +6,5 @@ import { Searchbar } from "./components/searchbar/searchbar.js"
 import { SongCard } from "./components/song-card/song-card.js"
 import { HomeContent } from "./components/home/home-content.js"
 import { PlayListFrontPage } from "./components/playlist-front-page/playlist-front-page.js"
+import { SongPage } from "./components/song-page/song-page.js"
 
