@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist</title>
+
+    <link href="tailwind.css" rel="stylesheet" />
+    <link href="./css/home.css" rel="stylesheet" />
+    <script type="module" src="home.js"></script>
+</head>
+<body>
+    <sidebar-comp></sidebar-comp>
+    <div class="md:pl-24 xl:pl-60 2xl:pl-[20rem] select-none">
+        <playlist-front-page-comp></playlist-front-page-comp>
+        <div class="ml-10 mt-14">
+            <songcard-comp></songcard-comp>
+            <songcard-comp></songcard-comp>
+            <songcard-comp></songcard-comp>
+            <songcard-comp></songcard-comp>
+        </div>
+    </div>
+</body>
+</html>
