@@ -17,9 +17,9 @@
         </button>
         <button class="mx-4">
           <img
-            src="play-icon.png"
+            src="play-icon.svg"
             alt="playBtn"
-            class="w-full h-auto md:w-10 md:h-10"
+            class="w-full h-auto md:w-10 md:h-10 transition-opacity duration-300"
           />
         </button>
         <button class="mx-4">
@@ -30,10 +30,13 @@
           />
         </button>
       </div>
-      <div class="mt-2 w-full h-1 rounded-full bg-darkfont">
+      <div
+        id="progressContainer"
+        class="mt-5 w-full h-1 rounded-full bg-darkfont"
+      >
         <div
           id="progress"
-          class="h-full rounded-full bg-dblue transition-all duration-500"
+          class="h-full rounded-full bg-dblue transition-all duration-500 z-50"
           style="width: 0%"
         ></div>
       </div>

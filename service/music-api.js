@@ -16,4 +16,4 @@ class MusicApi {
     }
 }
 
-export { MusicApi };
+export { MusicApi }

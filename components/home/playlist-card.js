@@ -12,6 +12,7 @@ export class PlaylistCard extends HTMLElement {
         this.appendContent(doc);
 
         this.addEventListener('click', () => {
+            console.log('card clicked');
             this.dispatchEvent(new CustomEvent('cardSelected', {
                 detail: {
                     cardId: this.getAttribute('id')

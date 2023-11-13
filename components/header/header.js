@@ -11,8 +11,16 @@ export class Header extends HTMLElement {
     }
 
     connectedCallback() {
+        const userIcon = this.shadowRoot.querySelector('img');
 
+        userIcon.addEventListener('click', () => {
+            const userModal = document.querySelector('user-modal');
+            if (userModal) {
+                userModal.open = 'true';
+            }
+        });
     }
+
 
 }
 

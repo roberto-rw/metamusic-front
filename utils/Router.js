@@ -7,8 +7,9 @@ const route = (event) => {
 };
 
 const routes = {
-    "/home": "/pages/home.html",
+    "/": "/pages/home.html",
     "/playlists": "/pages/playlists.html",
+    "/search": "/pages/search.html",
 };
 
 const handleLocation = async () => {
