@@ -1,0 +1,101 @@
+<link href="/tailwind.css" rel="stylesheet" />
+<aside
+  class="bg-gradient-to-r from-slate-900 from-5% to-dblue to-100% fixed top-0 left-0 w-0 md:w-24 xl:w-60 2xl:w-80 h-[calc(100vh-112px)] rounded-lg flex flex-col justify-between shadow-lg select-none"
+>
+  <div class="hidden md:block">
+    <div class="flex justify-center mt-4 xl:mt-10 xl:mb-3 2xl:mb-6">
+      <img
+        class="w-2/5 md:w-10 xl:w-1/2 2xl:w-40 h-auto"
+        src="meta-logo.png"
+        alt="MetaMusic"
+        draggable="false"
+      />
+    </div>
+    <nav class="flex justify-center items-center p-3">
+      <ul>
+        <li class="flex md:justify-center xl:justify-start m-3">
+          <a
+            draggable="false"
+            href="/"
+            onclick="route(event)"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="home-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4 pointer-events-none"
+            />
+            <h1 class="hidden xl:block pointer-events-none">Home</h1>
+          </a>
+        </li>
+        <li class="flex md:justify-center xl:justify-start m-3">
+          <a
+            draggable="false"
+            href="/search"
+            onclick="route(event)"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              draggable="false"
+              src="search-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4 pointer-events-none"
+            />
+            <span class="hidden xl:block pointer-events-none">Search</span>
+          </a>
+        </li>
+        <li class="flex md:justify-center xl:justify-start m-3">
+          <a
+            draggable="false"
+            href="/search"
+            onclick="route(event)"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="addButton-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4 pointer-events-none"
+            />
+            <span class="hidden xl:block pointer-events-none"
+              >Add Song</span
+            >
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="hidden md:block">
+    <nav class="flex justify-center p-3">
+      <ul>
+        <li class="flex md:justify-center xl:justify-start m-3">
+          <a
+            draggable="false"
+            href="#"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="settings-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4"
+            />
+            <span class="hidden xl:block">Setings</span>
+          </a>
+        </li>
+        <li class="flex md:justify-center xl:justify-start m-3">
+          <a
+            draggable="false"
+            href="login.html"
+            class="flex items-start p-2 text-sm lg:text-sm 2xl:text-xl text-white font-bold hover:text-gray-300 transition-colors"
+          >
+            <img
+              src="logout-icon.png"
+              alt="Home Icon"
+              class="w-5 2xl:w-6 h-5 2xl:h-6 xl:mr-4"
+            />
+            <span class="hidden xl:block">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
