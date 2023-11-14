@@ -10,4 +10,6 @@ import { SongPage } from "./components/song-page/song-page.js"
 import { SongList } from "./components/home/songs-list.js"
 import { SongCardHome } from "./components/home/song-card.js"
 import { Modal } from "./components/user-modal/user-modal.js"
+import { PlaylistCard2 } from "./components/playlists/playlist-card.js"
+import { PlaylistsContent } from "./components/playlists/playlists-cont.js"
 
