@@ -1,26 +1,15 @@
-const route = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log(event.target.href)
-    window.history.pushState({}, "", event.target.href);
-    handleLocation();
-};
+import page from 'page'
+import * as userController from '../controllers/userController.js'
+import * as playlistController from '../controllers/playlistController.js'
+/* import * as songController from '../controllers/songController.js' */
 
-const routes = {
-    "/": "/pages/home.html",
-    "/playlists": "/pages/playlists.html",
-    "/search": "/pages/search.html",
-};
+page('/', userController.homeController)
+page('/playlists/:username', playlistController.playlistsUsernameController)
+page('/playlists', playlistController.playlistsController)
+page('/search', playlistController.searchController)
 
-const handleLocation = async () => {
-    const path = window.location.pathname;
-    console.log(path);
-    const route = routes[path]
-    const html = await fetch(route).then((data) => data.text());
-    document.getElementById("content").innerHTML = html;
-};
+document.addEventListener('DOMContentLoaded', (event) => {
+    page.start()
+})
 
-window.onpopstate = handleLocation;
-window.route = route;
-
-handleLocation();
+export default page

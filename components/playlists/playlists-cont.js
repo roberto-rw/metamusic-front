@@ -16,33 +16,33 @@ export class PlaylistsContent extends HTMLElement {
             const titleElement = this.shadowRoot.querySelector('#title');
             titleElement.textContent = id;
         }
-
-
-        const playlists = [
+        const testPlaylists = [
             {
-                img: "https://editorial.aristeguinoticias.com/wp-content/uploads/2023/06/JK-SEVEN-29062023.jpg",
+                image: "https://editorial.aristeguinoticias.com/wp-content/uploads/2023/06/JK-SEVEN-29062023.jpg",
                 name: "Top hits",
                 id: "2364618815"
             },
             {
-                img: "https://blob.diariodelyaqui.mx/images/2021/06/27/yecorazo-jpeg-1624831497912-focus-min0.01-min0.25-732-549.jpg",
+                image: "https://blob.diariodelyaqui.mx/images/2021/06/27/yecorazo-jpeg-1624831497912-focus-min0.01-min0.25-732-549.jpg",
                 name: "Travel",
                 id: "1955330657"
             },
             {
-                img: "https://i.blogs.es/71281f/shingeki/1366_2000.jpeg",
+                image: "https://i.blogs.es/71281f/shingeki/1366_2000.jpeg",
                 name: "SNK",
                 id: "1591561262"
             }
         ];
 
+        const playlists = JSON.parse(this.getAttribute('playlists')) || testPlaylists;
+
         const playlistContainer = this.shadowRoot.querySelector('article.grid');
 
         playlists.forEach(playlist => {
             const playlistCard = document.createElement('playlistcard2-comp');
-            playlistCard.setAttribute('img', playlist.img);
+            playlistCard.setAttribute('img', playlist.image);
             playlistCard.setAttribute('name', playlist.name);
-            playlistCard.setAttribute('id', playlist.id);
+            playlistCard.setAttribute('id', '1955330657');
             playlistContainer.appendChild(playlistCard);
         });
     }

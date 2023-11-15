@@ -6,22 +6,20 @@
     <title>MetaMusic</title>
     <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
 
-    <link href="tailwind.css" rel="stylesheet" />
+    <link href="/tailwind.css" rel="stylesheet" />
     <link href="./css/home.css" rel="stylesheet" />
 
-    <script type="module" src="home.js"></script>
+    <script type="module" src="/index.js"></script>
   </head>
 
   <body class="bg-darkbg">
-    <header-comp></header-comp>
-    <sidebar-comp></sidebar-comp>
-
+    <header-comp id="header"></header-comp>
+    <sidebar-comp id="sidebar"></sidebar-comp>
     <main id="content" class="pt-20 pb-28"></main>
+    <musicplayer-comp id="musicplayer"></musicplayer-comp>
 
-    <musicplayer-comp></musicplayer-comp>
-
-    <user-modal></user-modal>
-
-    <script src="utils/Router.js"></script>
+    <!-- Modales -->
+    <user-modal id="user-modal"></user-modal>
+    <signup-modal id="signup-modal"></signup-modal>
   </body>
 </html>

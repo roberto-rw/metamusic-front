@@ -12,6 +12,9 @@ export class Header extends HTMLElement {
 
     connectedCallback() {
         const userIcon = this.shadowRoot.querySelector('img');
+        const userSalute = this.shadowRoot.querySelector('#user-salute');
+
+        userSalute.textContent = "Good morning, " + sessionStorage.getItem('username') + "!";
 
         userIcon.addEventListener('click', () => {
             const userModal = document.querySelector('user-modal');

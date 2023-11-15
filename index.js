@@ -12,4 +12,6 @@ import { SongCardHome } from "./components/home/song-card.js"
 import { Modal } from "./components/user-modal/user-modal.js"
 import { PlaylistCard2 } from "./components/playlists/playlist-card.js"
 import { PlaylistsContent } from "./components/playlists/playlists-cont.js"
-
+import { Login } from "./components/login/login.js"
+import { SignUp } from "./components/signup/signup.js"
+import page from "./utils/Router.js"
