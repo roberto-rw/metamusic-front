@@ -1,5 +1,12 @@
 # metamusic-front
 
-## How to install
-1. npm i
-2. npm run dev
+## How to install and run
+1. install dependencies
+```
+npm i
+```
+
+2. run server
+```
+npm run dev
+```
