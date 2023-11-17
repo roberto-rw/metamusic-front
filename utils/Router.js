@@ -4,8 +4,12 @@ import * as playlistController from '../controllers/playlistController.js'
 /* import * as songController from '../controllers/songController.js' */
 
 page('/', userController.homeController)
-page('/playlists/:username', playlistController.playlistsUsernameController)
-page('/playlists', playlistController.playlistsController)
+
+page('/playlist/:name', playlistController.playlistsUsernameController)
+page('/playlist', playlistController.playlistsController)
+
+page('/song', playlistController.songController)
+
 page('/search', playlistController.searchController)
 
 document.addEventListener('DOMContentLoaded', (event) => {

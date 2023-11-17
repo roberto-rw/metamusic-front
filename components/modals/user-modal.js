@@ -1,9 +1,9 @@
 const template = document.createElement('template')
 
-const html = await (await fetch('../assets/signup.html')).text()
+const html = await (await fetch('../assets/modals/user-modal.html')).text()
 template.innerHTML = html
 
-export class SignUp extends HTMLElement {
+export class UserModal extends HTMLElement {
     static get observedAttributes() {
         return ['open', 'onClose']
     }
@@ -16,7 +16,7 @@ export class SignUp extends HTMLElement {
         this._onCloseCallback = null
 
         this.onClose = () => {
-            const alerta = this.shadowRoot.getElementById('signup')
+            const alerta = this.shadowRoot.getElementById('alerta')
             alerta.style.display = 'none'
             this.setAttribute('open', 'false')
 
@@ -28,7 +28,7 @@ export class SignUp extends HTMLElement {
     }
 
     connectedCallback() {
-        this.btnCloseAlerta = this.shadowRoot.getElementById('btn-close-signup')
+        this.btnCloseAlerta = this.shadowRoot.getElementById('btn-close-alerta')
         this.btnCloseAlerta.addEventListener('click', this.onClose)
     }
 
@@ -39,10 +39,8 @@ export class SignUp extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'open' && newValue === 'true') {
-            const signup = this.shadowRoot.getElementById('signup')
-            if (signup) {
-                signup.style.display = 'flex'
-            }
+            const alerta = this.shadowRoot.getElementById('alerta')
+            alerta.style.display = 'flex'
         }
     }
 
@@ -55,4 +53,4 @@ export class SignUp extends HTMLElement {
     }
 }
 
-customElements.define('signup-modal', SignUp)
+customElements.define('user-modal', UserModal)

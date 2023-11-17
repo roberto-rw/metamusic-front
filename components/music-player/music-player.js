@@ -1,4 +1,5 @@
 import { MusicApi } from "../../service/music-api"
+import page from 'page';
 
 const template = document.createElement('template')
 
@@ -23,43 +24,27 @@ export class Player extends HTMLElement {
         const progress = this.shadowRoot.getElementById('progress')
         const volumeControl = this.shadowRoot.querySelector('#volume')
         const progressContainer = this.shadowRoot.getElementById('progressContainer')
+        const fullscreenButton = this.shadowRoot.getElementById('fullscreen')
 
         audio.src = this.#song.preview
 
         playButton.addEventListener('click', () => this.#togglePlay(audio))
         audio.addEventListener('timeupdate', () => this.#updateProgress(audio, progress))
-
         progressContainer.addEventListener('click', (event) => this.#seek(event, audio, progress))
-
-        volumeControl.addEventListener('input', () => {
-            volumeControl.style.setProperty('--volume-percentage', `${volumeControl.value * 100}%`)
-            audio.volume = volumeControl.value
-        });
+        volumeControl.addEventListener('input', () => this.#updateVolume(audio, volumeControl))
+        fullscreenButton.addEventListener('click', () => this.#handleFullscreenClick())
 
         document.addEventListener('cardSelected', async (event) => {
             let playlistId = event.detail.cardId
             await this.#getSong(playlistId)
             audio.src = this.#song.preview
             audio.play()
-            playButton.src = 'pause-icon.svg'
-        });
-    }
-
-    startListening() {
-        let playlistCard = document.querySelector('playlistcard-comp')
-
-        playlistCard.addEventListener('cardSelected', async (event) => {
-            let playlistId = event.detail.cardId
-            await this.#getSong(playlistId)
-            let audio = this.shadowRoot.getElementById('audio')
-            audio.src = this.#song.preview
-            audio.play()
+            playButton.src = '/pause-icon.svg'
         });
     }
 
     async #getSong(id) {
         this.#song = await this.#api.getSong(id)
-        console.log(this.#song)
     }
 
     #seek(event, audio, progress) {
@@ -76,16 +61,25 @@ export class Player extends HTMLElement {
         const playButton = this.shadowRoot.querySelector('img[alt="playBtn"]');
         if (audio.paused) {
             audio.play()
-            playButton.src = 'pause-icon.svg'
+            playButton.src = '/pause-icon.svg'
         } else {
             audio.pause()
-            playButton.src = 'play-icon.svg'
+            playButton.src = '/play-icon.svg'
         }
     }
 
     #updateProgress(audio, progress) {
         const progressPercent = (audio.currentTime / audio.duration) * 100
         progress.style.width = `${progressPercent}%`
+    }
+
+    #updateVolume(audio, volumeControl) {
+        volumeControl.style.setProperty('--volume-percentage', `${volumeControl.value * 100}%`)
+        audio.volume = volumeControl.value
+    }
+
+    #handleFullscreenClick() {
+        page.redirect('/song');
     }
 }
 

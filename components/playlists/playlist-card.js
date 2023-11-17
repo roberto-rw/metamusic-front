@@ -1,3 +1,4 @@
+import page from 'page';
 export class PlaylistCard2 extends HTMLElement {
     constructor() {
         super()
@@ -5,22 +6,16 @@ export class PlaylistCard2 extends HTMLElement {
     }
 
     async connectedCallback() {
-        const doc = await this.loadTemplate();
-        this.updateImage(doc);
-        this.updateName(doc);
-        this.appendStyles(doc);
-        this.appendContent(doc);
+        const doc = await this.loadTemplate()
+        this.updateImage(doc)
+        this.updateName(doc)
+        this.appendStyles(doc)
+        this.appendContent(doc)
 
         this.addEventListener('click', () => {
-            console.log('card clicked');
-            this.dispatchEvent(new CustomEvent('cardSelected', {
-                detail: {
-                    cardId: this.getAttribute('id')
-                },
-                bubbles: true,
-                composed: true
-            }));
-        });
+            const playlistName = this.getAttribute('name')
+            page.redirect(`/playlist/${playlistName}`)
+        })
     }
 
     async loadTemplate() {

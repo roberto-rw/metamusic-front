@@ -47,6 +47,21 @@ class MetaMusicApi {
         }
     }
 
+    async register(username, password, email) {
+        const options = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password, email })
+        }
+        let response = await fetch(this.#urlUser, options)
+        let json = await response.json()
+        return json
+    }
+
+
+    // Playlist requests
     async getPlaylistUsername(username) {
         const options = {
             method: "GET",
@@ -54,6 +69,32 @@ class MetaMusicApi {
             },
         }
         let response = await fetch((this.#urlPlaylist + "search/byuser/" + username), options)
+        let json = await response.json()
+        return json
+    }
+
+    async createPlaylist(name, description, image, username) {
+        const options = {
+            method: "POST",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, description, image, user: { username } })
+        }
+        let response = await fetch(this.#urlPlaylist, options)
+        let json = await response.json()
+        return json
+    }
+
+    //test
+    async getPlaylistSongs() {
+        const options = {
+            method: "GET",
+            headers: {
+            },
+        }
+        let response = await fetch(("http://localhost:3000/song/"), options)
         let json = await response.json()
         return json
     }
