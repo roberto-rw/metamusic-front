@@ -1,4 +1,4 @@
-import { api } from "../../service/metamusic-api.js"
+import { login } from "../../service/userService.js"
 
 const template = document.createElement('template')
 
@@ -31,7 +31,7 @@ export class Login extends HTMLElement {
         const password = this.#passwordInput.value;
 
         try {
-            const data = await api.login(username, password)
+            const data = await login(username, password)
 
             if (data.success) {
                 window.location.href = "/";

@@ -1,16 +1,14 @@
 import page from 'page'
-import * as userController from '../controllers/userController.js'
-import * as playlistController from '../controllers/playlistController.js'
-/* import * as songController from '../controllers/songController.js' */
+import { loadPlaylistsPage } from '../controllers/playlistController.js'
+import { homeController } from '../controllers/userController.js'
+import { loadSearchSongPage } from '../controllers/songController.js'
 
-page('/', userController.homeController)
+page('/', homeController)
 
-page('/playlist/:name', playlistController.playlistsUsernameController)
-page('/playlist', playlistController.playlistsController)
-
-page('/song', playlistController.songController)
-
-page('/search', playlistController.searchController)
+//page('/playlist/:name', playlistController.playlistsUsernameController)
+page('/playlist', loadPlaylistsPage)
+//page('/song', playlistController.songController)
+page('/search', loadSearchSongPage)
 
 document.addEventListener('DOMContentLoaded', (event) => {
     page.start()

@@ -42,7 +42,6 @@ export class PlaylistsContent extends HTMLElement {
         const testPlaylists = [
             // ...
         ];
-
         const playlists = JSON.parse(this.getAttribute('playlists')) || testPlaylists
 
         playlists.forEach(playlist => {

@@ -1,4 +1,4 @@
-import { api } from "../../service/metamusic-api.js"
+import { register } from "../../service/userService.js"
 
 const template = document.createElement('template')
 
@@ -49,7 +49,7 @@ export class SignupModal extends HTMLElement {
             }
 
             try {
-                const data = await api.register(username, password, email);
+                const data = await register(username, password, email);
 
                 if (data.success) {
                     // Si el registro fue exitoso, redirige a la ruta "/login"

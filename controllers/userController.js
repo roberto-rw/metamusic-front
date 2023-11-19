@@ -1,4 +1,4 @@
-import { api } from '../service/metamusic-api.js'
+import { isAuthenticated } from '../service/userService'
 import page from 'page'
 
 export async function homeController() {
@@ -6,7 +6,7 @@ export async function homeController() {
     const sidebar = document.getElementById('sidebar')
     const musicplayer = document.getElementById('musicplayer')
 
-    if (await api.isAuthenticated()) {
+    if (await isAuthenticated()) {
         // Si el usuario está autenticado, muestra los componentes
         header.style.display = 'block'
         sidebar.style.display = 'block'
