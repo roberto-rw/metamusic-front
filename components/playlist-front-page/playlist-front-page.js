@@ -1,4 +1,4 @@
-import { api } from "../../service/metamusic-api"
+import { getPlaylistSongs } from "../../service/userService"
 
 const template = document.createElement('template')
 const html = await (await fetch('../assets/playlist-front-page.html')).text()
@@ -15,7 +15,7 @@ export class PlaylistFrontPage extends HTMLElement {
     }
 
     async connectedCallback() {
-        const songs = await api.getPlaylistSongs();
+        const songs = await getPlaylistSongs();
         this.#createSongCards(songs);
     }
 

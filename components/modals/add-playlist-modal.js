@@ -1,4 +1,4 @@
-import { api } from "../../service/metamusic-api.js"
+import { createPlaylist } from "../../service/playlistService.js"
 import page from "page"
 
 const template = document.createElement('template')
@@ -42,7 +42,7 @@ export class AddPlaylistModal extends HTMLElement {
             const image = 'https://i.ibb.co/W6nStSF/ddf740b5-fd3a-4cfc-b13f-81e36225066f.jpg'
 
             try {
-                const data = await api.createPlaylist(name, description, image, username);
+                const data = await createPlaylist(name, description, image, username);
 
                 if (data.success) {
                     this.onClose()
