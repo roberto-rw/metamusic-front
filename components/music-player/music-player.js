@@ -40,7 +40,15 @@ export class Player extends HTMLElement {
             audio.src = this.#song.preview
             audio.play()
             playButton.src = '/pause-icon.svg'
+            console.log(event.detail)
+            this.#printSong(event.detail)
         });
+    }
+
+    #printSong(details){
+        this.shadowRoot.getElementById("title").textContent = details.cardName
+        this.shadowRoot.getElementById("artist").textContent = details.cardArtist
+        this.shadowRoot.getElementById("image").src = details.cardImage
     }
 
     async #getSong(id) {

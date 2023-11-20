@@ -25,7 +25,10 @@ export class SongCard extends HTMLElement {
             console.log('card clicked');
             this.dispatchEvent(new CustomEvent('cardSelected', {
                 detail: {
-                    cardId: this.getAttribute('idsong')
+                    cardId: this.getAttribute('idsong'),
+                    cardName: this.getAttribute('name'),
+                    cardArtist: this.getAttribute('artist'),
+                    cardImage: this.getAttribute('img')
                 },
                 bubbles: true,
                 composed: true
