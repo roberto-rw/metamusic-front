@@ -1,11 +1,11 @@
 import page from 'page'
-import { loadPlaylistsPage } from '../controllers/playlistController.js'
+import { loadPlaylistsPage, playlistsUsernameController } from '../controllers/playlistController.js'
 import { homeController } from '../controllers/userController.js'
 import { loadSearchSongPage } from '../controllers/songController.js'
 
 page('/', homeController)
 
-//page('/playlist/:name', playlistController.playlistsUsernameController)
+page('/playlist/:name', playlistsUsernameController)
 page('/playlist', loadPlaylistsPage)
 //page('/song', playlistController.songController)
 page('/search', loadSearchSongPage)
