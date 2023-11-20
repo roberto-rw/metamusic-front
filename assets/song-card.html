@@ -1,11 +1,25 @@
 <link href="/tailwind.css" rel="stylesheet" />
+
+<style>
+  #card-song:hover .overlay,
+  #card-song:hover .play-icon {
+      display: flex;
+  }
+</style>
+
 <div class="flex py-2 w-3/4">
-  <div id="card" class="flex hover:cursor-pointer">
-    <img
-      src="https://m.media-amazon.com/images/I/81C6LV7yNTL._UF1000,1000_QL80_.jpg"
-      alt=""
-      class="w-16 rounded-lg"
-    />
+  <div id="card-song" class="flex hover:cursor-pointer relative">
+    <div class="relative w-16" id="img-container">
+      <img
+        src="https://m.media-amazon.com/images/I/81C6LV7yNTL._UF1000,1000_QL80_.jpg"
+        alt=""
+        class="rounded-lg w-full"
+      />
+      <div class="overlay absolute inset-0 bg-black opacity-50 hidden"></div>
+      <div class="play-icon absolute inset-0 flex items-center justify-center text-white text-4xl hidden">
+          ▶
+      </div>
+    </div>
     <div class="ml-4">
       <h3 id="name" class="text-lg">Song name</h3>
       <p id="artist" class="text-sm">Artist name</p>
