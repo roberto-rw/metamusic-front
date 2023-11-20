@@ -36,7 +36,7 @@ export class Searchbar extends HTMLElement{
         songCard.setAttribute('name', song.name)
         songCard.setAttribute('duration', song.duration)
         songCard.setAttribute('artist', song.singers)
-        songCard.setAttribute('idsong', song.id)
+        songCard.setAttribute('idsong', song.idsong)
         return songCard
     }
         
