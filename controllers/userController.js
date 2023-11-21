@@ -1,4 +1,4 @@
-import { isAuthenticated } from '../service/userService'
+import { isAuthenticated, logout } from '../service/userService'
 import page from 'page'
 
 export async function homeController() {
@@ -22,5 +22,16 @@ export async function homeController() {
 
         const html = await fetch("/pages/login.html").then((data) => data.text())
         document.getElementById("content").innerHTML = html
+    }
+}
+
+export async function logoutController() {
+    const response = await logout()
+    if (response.success) {
+        sessionStorage.removeItem('username')
+        page.redirect('/')
+    }
+    else {
+        console.error('Error logging out:', response.error)
     }
 }

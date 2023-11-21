@@ -15,5 +15,6 @@ import { PlaylistsContent } from "./components/playlists/playlists-cont.js"
 import { Login } from "./components/login/login.js"
 import { SignupModal } from "./components/modals/signup-modal.js"
 import { AddPlaylistModal } from "./components/modals/add-playlist-modal.js"
+import { SongMenu } from "./components/menus/songMenu.js"
 
-import page from "./utils/Router.js"
+import page from "./routes/Router.js"

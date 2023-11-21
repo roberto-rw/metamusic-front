@@ -1,5 +1,5 @@
 import page from 'page'
-import { getPlaylistByUsername } from '../service/playlistService';
+import { getPlaylistByUsername, getPlaylistByName } from '../service/playlistService';
 import { isAuthenticated } from '../service/userService';
 
 export async function loadPlaylistsPage() {
@@ -15,16 +15,20 @@ export async function loadPlaylistsPage() {
     }
 }
 
-export async function playlistsUsernameController(ctx) {
+export async function deployPlaylist(ctx) {
     if (await isAuthenticated()) {
         const name = ctx.params.name
+        const playlist = await getPlaylistByName(name)
 
-        /* const playlists = await api.getPlaylistUsername(username)
-        const playlistsComp = document.createElement('playlists-comp')
-        playlistsComp.setAttribute('playlists', JSON.stringify(playlists)) */
+        const playlistComp = document.createElement('playlist-front-page-comp')
+        playlistComp.setAttribute('name', playlist.name)
+        playlistComp.setAttribute('author', playlist.user.username)
+        playlistComp.setAttribute('description', playlist.description)
+        playlistComp.setAttribute('image', playlist.image)
+        playlistComp.setAttribute('songs', JSON.stringify(playlist.songs))
 
-        const html = await fetch("/pages/playlist.html").then((data) => data.text())
-        document.getElementById("content").innerHTML = html
+        document.getElementById("content").innerHTML = ''
+        document.getElementById("content").appendChild(playlistComp)
     } else {
         page.redirect('/')
     }

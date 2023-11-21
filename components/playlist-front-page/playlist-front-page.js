@@ -1,25 +1,49 @@
-import { getPlaylistSongs } from "../../service/userService"
-
 const template = document.createElement('template')
 const html = await (await fetch('../assets/playlist-front-page.html')).text()
 template.innerHTML = html
 
 export class PlaylistFrontPage extends HTMLElement {
-    #songsContainer;
+    #songsContainer
+    #titleElement
+    #authorElement
+    #imageElement
+    #imagebgElement
+
 
     constructor() {
         super();
-        const shadow = this.attachShadow({ mode: 'open' });
-        shadow.appendChild(template.content.cloneNode(true));
-        this.#songsContainer = this.shadowRoot.querySelector('#songs-container');
+        const shadow = this.attachShadow({ mode: 'open' })
+        shadow.appendChild(template.content.cloneNode(true))
+        this.#songsContainer = this.shadowRoot.querySelector('#songs-container')
+        this.#titleElement = this.shadowRoot.querySelector('#title')
+        this.#authorElement = this.shadowRoot.querySelector('#author')
+        this.#imageElement = this.shadowRoot.querySelector('#image')
+        this.#imagebgElement = this.shadowRoot.querySelector('#image-bg')
     }
 
     async connectedCallback() {
-        const songs = await getPlaylistSongs();
-        this.#createSongCards(songs);
+        this.#createSongCards()
+        this.#setTitle()
+        this.#setAuthor()
+        this.#setImage()
+
     }
 
-    #createSongCards(songs) {
+    #setTitle() {
+        this.#titleElement.innerHTML = this.getAttribute('name')
+    }
+
+    #setAuthor() {
+        this.#authorElement.innerHTML = `by ${this.getAttribute('author')}`
+    }
+
+    #setImage() {
+        this.#imageElement.setAttribute('src', this.getAttribute('image'))
+        this.#imagebgElement.setAttribute('style', `background-image: url(${this.getAttribute('image')})`)
+    }
+
+    #createSongCards() {
+        const songs = JSON.parse(this.getAttribute('songs'))
         songs.forEach(song => {
             const songCard = this.#createSongCard(song);
             this.#songsContainer.appendChild(songCard);
@@ -27,27 +51,13 @@ export class PlaylistFrontPage extends HTMLElement {
     }
 
     #createSongCard(song) {
-        const songCard = document.createElement('songcard-comp');
-        songCard.setAttribute('name', song.name);
-        songCard.setAttribute('artist', song.singers);
-        songCard.setAttribute('duration', song.duration);
-        songCard.setAttribute('id', song.idsong);
-
-        const card = songCard.shadowRoot.querySelector('#card');
-        card.addEventListener('click', () => this.#handleCardClick(song.idsong));
-
-        return songCard;
-    }
-
-    #handleCardClick(songId) {
-        console.log('card clicked');
-        this.dispatchEvent(new CustomEvent('cardSelected', {
-            detail: {
-                cardId: songId
-            },
-            bubbles: true,
-            composed: true
-        }));
+        const songCard = document.createElement('songcard-comp')
+        songCard.setAttribute('img', song.image)
+        songCard.setAttribute('name', song.name)
+        songCard.setAttribute('duration', song.duration)
+        songCard.setAttribute('artist', song.singers)
+        songCard.setAttribute('idsong', song.idsong)
+        return songCard
     }
 }
 

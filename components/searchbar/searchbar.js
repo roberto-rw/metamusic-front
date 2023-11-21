@@ -4,17 +4,17 @@ import { getSongsByName } from "../../service/songService"
 const html = await (await fetch('../assets/searchbar.html')).text()
 template.innerHTML = html
 
-export class Searchbar extends HTMLElement{
+export class Searchbar extends HTMLElement {
     #searchbar
-    constructor(){
+    constructor() {
         super()
-        const shadow = this.attachShadow({mode: 'open'})
+        const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(template.content.cloneNode(true))
         this.#searchbar = this.shadowRoot.querySelector('#searchbar')
     }
 
-    connectedCallback(){
-        
+    connectedCallback() {
+
         this.#searchbar.addEventListener('keyup', () => this.#printSearchResults())
     }
 
@@ -27,19 +27,29 @@ export class Searchbar extends HTMLElement{
             const songCard = this.#createSongCard(song)
             songsContainer.appendChild(songCard)
         })
-        
+
     }
 
-    #createSongCard(song){
+    #createSongCard(song) {
         const songCard = document.createElement('songcard-comp')
         songCard.setAttribute('img', song.image)
         songCard.setAttribute('name', song.name)
         songCard.setAttribute('duration', song.duration)
         songCard.setAttribute('artist', song.singers)
         songCard.setAttribute('idsong', song.idsong)
+
+        // Crear el menú
+        const songMenu = document.querySelector('song-menu')
+
+        // Mostrar el menú al hacer clic derecho en songCard
+        songCard.addEventListener('contextmenu', (event) => {
+            event.preventDefault()
+            songMenu.show(event)
+        })
+
         return songCard
     }
-        
+
 
 }
 

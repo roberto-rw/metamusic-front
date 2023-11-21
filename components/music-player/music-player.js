@@ -27,6 +27,7 @@ export class Player extends HTMLElement {
         const fullscreenButton = this.shadowRoot.getElementById('fullscreen')
 
         audio.src = this.#song.preview
+        audio.volume = 0.1
 
         playButton.addEventListener('click', () => this.#togglePlay(audio))
         audio.addEventListener('timeupdate', () => this.#updateProgress(audio, progress))
@@ -45,7 +46,7 @@ export class Player extends HTMLElement {
         });
     }
 
-    #printSong(details){
+    #printSong(details) {
         this.shadowRoot.getElementById("title").textContent = details.cardName
         this.shadowRoot.getElementById("artist").textContent = details.cardArtist
         this.shadowRoot.getElementById("image").src = details.cardImage
@@ -82,8 +83,8 @@ export class Player extends HTMLElement {
     }
 
     #updateVolume(audio, volumeControl) {
+        audio.volume = volumeControl.value * 0.1
         volumeControl.style.setProperty('--volume-percentage', `${volumeControl.value * 100}%`)
-        audio.volume = volumeControl.value
     }
 
     #handleFullscreenClick() {

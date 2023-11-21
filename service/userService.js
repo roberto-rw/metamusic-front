@@ -18,6 +18,16 @@ export async function login(username, password) {
     return json
 }
 
+export async function logout() {
+    const options = {
+        method: "POST",
+        credentials: 'include'
+    }
+    let response = await fetch(ENDPOINTS.USER_URL + "logout", options)
+    let json = await response.json()
+    return json
+}
+
 async function isAuth() {
     const options = {
         method: "GET",
@@ -51,7 +61,7 @@ export async function register(username, password, email) {
         },
         body: JSON.stringify({ username, password, email })
     }
-    let response = await fetch(ENDPOINTS.USER_URL , options)
+    let response = await fetch(ENDPOINTS.USER_URL, options)
     let json = await response.json()
     return json
 }
@@ -69,7 +79,7 @@ export async function getPlaylistUsername(username) {
     return json
 }
 
- export async function createPlaylist(name, description, image, username) {
+export async function createPlaylist(name, description, image, username) {
     const options = {
         method: "POST",
         credentials: 'include',
@@ -78,13 +88,13 @@ export async function getPlaylistUsername(username) {
         },
         body: JSON.stringify({ name, description, image, user: { username } })
     }
-    let response = await fetch(ENDPOINTS.PLAYLIST_URL , options)
+    let response = await fetch(ENDPOINTS.PLAYLIST_URL, options)
     let json = await response.json()
     return json
 }
 
 //test
- export async function getPlaylistSongs() {
+export async function getPlaylistSongs() {
     const options = {
         method: "GET",
         headers: {

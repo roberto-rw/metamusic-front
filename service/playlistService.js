@@ -11,6 +11,20 @@ export async function getPlaylistByUsername(username) {
     return json
 }
 
+export async function getPlaylistByName(name) {
+    const options = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+        },
+    }
+    let response = await fetch((ENDPOINTS.PLAYLIST_URL + "search/byname/" + name), options)
+    let json = await response.json()
+    return json[0]
+}
+
+
+
 export async function createPlaylist(name, description, image, username) {
     const options = {
         method: "POST",

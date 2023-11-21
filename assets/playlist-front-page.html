@@ -2,10 +2,8 @@
 <div class="md:pl-24 xl:pl-60 2xl:pl-[20rem] select-none">
   <header>
     <div
+      id="image-bg"
       class="w-full h-80 bg-cover bg-center relative flex items-center lg:flex lg:justify-center"
-      style="
-        background-image: url('https://i.ibb.co/W6nStSF/ddf740b5-fd3a-4cfc-b13f-81e36225066f.jpg');
-      "
     >
       <div class="absolute inset-0 bg-black opacity-50"></div>
       <div
@@ -13,14 +11,17 @@
       >
         <div class="flex flex-row items-center space-x-4">
           <img
+            id="image"
             src="https://i.ibb.co/W6nStSF/ddf740b5-fd3a-4cfc-b13f-81e36225066f.jpg"
             alt=""
             class="w-48 h-48 object-cover rounded-lg ml-4 mt-4 lg:w-64 lg:h-64 lg:ml-0 lg:mt-0"
           />
           <div class="ml-4 mt-4 lg:ml-8 lg:mt-0">
             <h2 class="text-white text-lg font-bold lg:text-xl">PLAYLIST</h2>
-            <h1 class="text-white text-3xl font-bold lg:text-5xl">Titulo</h1>
-            <h3 class="text-white text-lg lg:text-lg">by Ea</h3>
+            <h1 id="title" class="text-white text-3xl font-bold lg:text-5xl">
+              Titulo
+            </h1>
+            <h3 id="author" class="text-white text-lg lg:text-lg">by Ea</h3>
           </div>
         </div>
         <button

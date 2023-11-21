@@ -17,12 +17,9 @@ export class SongCard extends HTMLElement {
         this.shadowRoot.querySelector('#name').textContent = this.getAttribute('name');
         this.shadowRoot.querySelector('#duration').textContent = toMinutes(this.getAttribute('duration'));
         this.shadowRoot.querySelector('#artist').textContent = this.getAttribute('artist');
-        
-        
-        this.shadowRoot.querySelector('#img-container').addEventListener('click', this.togglePlayPause.bind(this));
 
-        this.addEventListener('click', () => {
-            console.log('card clicked');
+        this.shadowRoot.querySelector('#img-container').addEventListener('click', () => {
+            this.togglePlayPause()
             this.dispatchEvent(new CustomEvent('cardSelected', {
                 detail: {
                     cardId: this.getAttribute('idsong'),
@@ -33,7 +30,7 @@ export class SongCard extends HTMLElement {
                 bubbles: true,
                 composed: true
             }));
-        }); 
+        });
     }
 
     // Cambia el icono de play y pausa
