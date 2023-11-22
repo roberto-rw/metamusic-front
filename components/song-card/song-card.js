@@ -22,15 +22,15 @@ export class SongCard extends HTMLElement {
             this.togglePlayPause()
             this.dispatchEvent(new CustomEvent('cardSelected', {
                 detail: {
-                    cardId: this.getAttribute('idsong'),
-                    cardName: this.getAttribute('name'),
-                    cardArtist: this.getAttribute('artist'),
-                    cardImage: this.getAttribute('img')
+                    idsong: this.getAttribute('idsong'),
+                    name: this.getAttribute('name'),
+                    singers: this.getAttribute('artist'),
+                    image: this.getAttribute('img')
                 },
                 bubbles: true,
                 composed: true
-            }));
-        });
+            }))
+        })
     }
 
     // Cambia el icono de play y pausa

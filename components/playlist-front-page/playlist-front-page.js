@@ -8,6 +8,8 @@ export class PlaylistFrontPage extends HTMLElement {
     #authorElement
     #imageElement
     #imagebgElement
+    #playPlaylistButton
+    #songs = []
 
 
     constructor() {
@@ -19,6 +21,7 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#authorElement = this.shadowRoot.querySelector('#author')
         this.#imageElement = this.shadowRoot.querySelector('#image')
         this.#imagebgElement = this.shadowRoot.querySelector('#image-bg')
+        this.#playPlaylistButton = this.shadowRoot.querySelector('#playPlaylist')
     }
 
     async connectedCallback() {
@@ -27,6 +30,17 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#setAuthor()
         this.#setImage()
 
+        this.#playPlaylistButton.addEventListener('click', () => this.#handlePlayPlaylist())
+    }
+
+    #handlePlayPlaylist() {
+        this.dispatchEvent(new CustomEvent('addSongsQueue', {
+            detail: {
+                songs: this.#songs
+            },
+            bubbles: true,
+            composed: true
+        }));
     }
 
     #setTitle() {
@@ -44,6 +58,7 @@ export class PlaylistFrontPage extends HTMLElement {
 
     #createSongCards() {
         const songs = JSON.parse(this.getAttribute('songs'))
+        this.#songs = songs
         songs.forEach(song => {
             const songCard = this.#createSongCard(song);
             this.#songsContainer.appendChild(songCard);

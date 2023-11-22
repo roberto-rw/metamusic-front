@@ -1,8 +1,13 @@
+import { getPlaylistByUsername, addSongToPlaylist } from "/service/playlistService.js"
+
 const template = document.createElement('template')
 const html = await (await fetch('../assets/menus/songMenu.html')).text()
 template.innerHTML = html
 
 export class SongMenu extends HTMLElement {
+    playlist
+    #songDetails
+
     constructor() {
         super()
         const shadow = this.attachShadow({ mode: 'open' })
@@ -10,16 +15,18 @@ export class SongMenu extends HTMLElement {
     }
 
     async connectedCallback() {
+        this.playlists = await this.getPlaylists()
+        const showPlaylistElement = this.shadowRoot.querySelector('#showPlaylist')
+        const liElement = showPlaylistElement.parentElement
+
+
         document.addEventListener('click', (event) => {
             this.hide()
         })
 
-        const showPlaylistElement = this.shadowRoot.querySelector('#showPlaylist')
-        const liElement = showPlaylistElement.parentElement
-
         showPlaylistElement.addEventListener('mouseover', async () => {
-            const playlists = await this.getPlaylists()
-            this.showPlaylists(playlists)
+
+            this.showPlaylists(this.playlists)
             liElement.classList.remove('flex-col')
             liElement.classList.add('flex-row')
         })
@@ -36,19 +43,27 @@ export class SongMenu extends HTMLElement {
     }
 
     async getPlaylists() {
-        return ['Playlist 1', 'Playlist 2', 'Playlist 3']
+        return await getPlaylistByUsername(sessionStorage.getItem('username'))
     }
 
     showPlaylists(playlists) {
         const playlistsElement = this.shadowRoot.querySelector('#playlists')
-        playlistsElement.innerHTML = playlists.map(playlist => `<h3>${playlist}</h3>`).join('')
-        playlistsElement.classList.add('py-2')
 
-        playlistsElement.querySelectorAll('h3').forEach((playlistElement, index) => {
-            playlistElement.classList.add('hover:cursor-pointer', 'p-2')
-            playlistElement.addEventListener('click', () => this.onPlaylistClick(index))
-        })
+        // Clear playlistsElement
+        while (playlistsElement.firstChild) {
+            playlistsElement.removeChild(playlistsElement.firstChild);
+        }
 
+        playlists.forEach((playlist, index) => {
+            const div = document.createElement('div');
+            div.className = 'p-2 cursor-pointer bg-gray-500';
+            div.dataset.index = index;
+            div.textContent = playlist.name;
+
+            div.addEventListener('click', () => this.onPlaylistClick(playlist._id));
+
+            playlistsElement.appendChild(div);
+        });
         playlistsElement.classList.remove('hidden')
     }
 
@@ -57,11 +72,23 @@ export class SongMenu extends HTMLElement {
         playlistsElement.classList.add('hidden')
     }
 
-    onPlaylistClick(index) {
-        console.log(`Playlist at index ${index} was clicked.`)
+    async onPlaylistClick(id) {
+        const result = await addSongToPlaylist(id, this.#songDetails.cardId)
+
+        if (result.success) {
+            console.log(`Song with id ${this.#songDetails.cardId} was added to playlist with id ${id}.`)
+        } else {
+            console.log(`Song with id ${this.#songDetails.cardId} was not added to playlist with id ${id}.`)
+        }
     }
 
-    show(event) {
+    show(event, songDetails) {
+        if (this.#songDetails !== songDetails) {
+            this.#songDetails = songDetails
+
+            console.log(`SongMenu: ${songDetails.cardName} was clicked.`)
+        }
+
         const posElement = this.shadowRoot.querySelector('.pos')
         if (posElement) {
             posElement.classList.remove('hidden')

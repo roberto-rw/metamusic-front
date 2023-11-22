@@ -23,8 +23,6 @@ export async function getPlaylistByName(name) {
     return json[0]
 }
 
-
-
 export async function createPlaylist(name, description, image, username) {
     const options = {
         method: "POST",
@@ -35,6 +33,32 @@ export async function createPlaylist(name, description, image, username) {
         body: JSON.stringify({ name, description, image, user: { username } })
     }
     let response = await fetch(ENDPOINTS.PLAYLIST_URL, options)
+    let json = await response.json()
+    return json
+}
+
+export async function deletePlaylist(idplaylist) {
+    const options = {
+        method: "DELETE",
+        credentials: 'include',
+        headers: {
+        },
+    }
+    let response = await fetch((ENDPOINTS.PLAYLIST_URL + idplaylist), options)
+    let json = await response.json()
+    return json
+}
+
+export async function addSongToPlaylist(idplaylist, idsong) {
+    const options = {
+        method: "PUT",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ idsong })
+    }
+    let response = await fetch(`${ENDPOINTS.PLAYLIST_URL}/update/addsong/${idplaylist}`, options)
     let json = await response.json()
     return json
 }

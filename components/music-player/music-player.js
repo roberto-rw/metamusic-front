@@ -7,49 +7,154 @@ const html = await (await fetch('../assets/music-player.html')).text()
 template.innerHTML = html
 
 export class Player extends HTMLElement {
-    #api = new MusicApi()
+    #api
     #song
+
+    #actualSong
+    #queue
+    #playedSongs
+    #repeat
+
+    #audio
+    #playButton
+    #progress
+    #volumeControl
+    #progressContainer
+    #fullscreenButton
+    #nextButton
+    #prevButton
+    #repeatButton
 
     constructor() {
         super()
+        this.#api = new MusicApi()
+        this.#song = null
+        this.#actualSong = null
+        this.#queue = []
+        this.#playedSongs = []
+        this.#repeat = false
         const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(template.content.cloneNode(true))
+        this.#audio = this.shadowRoot.getElementById('audio')
+        this.#playButton = this.shadowRoot.querySelector('img[alt="playBtn"]')
+        this.#progress = this.shadowRoot.getElementById('progress')
+        this.#volumeControl = this.shadowRoot.querySelector('#volume')
+        this.#progressContainer = this.shadowRoot.getElementById('progressContainer')
+        this.#fullscreenButton = this.shadowRoot.getElementById('fullscreen')
+        this.#nextButton = this.shadowRoot.getElementById('next-song')
+        this.#prevButton = this.shadowRoot.getElementById('prev-song')
+        this.#repeatButton = this.shadowRoot.getElementById('repeat-songs')
     }
 
     async connectedCallback() {
-        await this.#getSong('484717632')
+        this.#audio.volume = 0.1
+        this.#playButton.addEventListener('click', () => this.#togglePlay(this.#audio))
+        this.#audio.addEventListener('timeupdate', () => this.#updateProgress(this.#audio, this.#progress))
+        this.#progressContainer.addEventListener('click', (event) => this.#seek(event, this.#audio, this.#progress))
+        this.#volumeControl.addEventListener('input', () => this.#updateVolume(this.#audio, this.#volumeControl))
+        this.#fullscreenButton.addEventListener('click', () => this.#handleFullscreenClick())
 
-        const audio = this.shadowRoot.getElementById('audio')
-        const playButton = this.shadowRoot.querySelector('img[alt="playBtn"]')
-        const progress = this.shadowRoot.getElementById('progress')
-        const volumeControl = this.shadowRoot.querySelector('#volume')
-        const progressContainer = this.shadowRoot.getElementById('progressContainer')
-        const fullscreenButton = this.shadowRoot.getElementById('fullscreen')
+        this.#nextButton.addEventListener('click', () => this.#playNextSong())
+        this.#prevButton.addEventListener('click', () => this.#playPrevSong())
+        this.#repeatButton.addEventListener('click', () => this.#handleRepeat())
 
-        audio.src = this.#song.preview
-        audio.volume = 0.1
-
-        playButton.addEventListener('click', () => this.#togglePlay(audio))
-        audio.addEventListener('timeupdate', () => this.#updateProgress(audio, progress))
-        progressContainer.addEventListener('click', (event) => this.#seek(event, audio, progress))
-        volumeControl.addEventListener('input', () => this.#updateVolume(audio, volumeControl))
-        fullscreenButton.addEventListener('click', () => this.#handleFullscreenClick())
 
         document.addEventListener('cardSelected', async (event) => {
-            let playlistId = event.detail.cardId
-            await this.#getSong(playlistId)
-            audio.src = this.#song.preview
-            audio.play()
-            playButton.src = '/pause-icon.svg'
-            console.log(event.detail)
-            this.#printSong(event.detail)
-        });
+            this.#queue = []
+
+            const songDetails = event.detail
+            this.#queue.push(songDetails) // Add the song to the queue
+
+            // If the queue was empty, start playing the song
+            if (this.#queue.length === 1) {
+                this.#playNextSong()
+            }
+        })
+
+        document.addEventListener('addSongsQueue', async (event) => {
+            this.#queue = []
+
+            const songs = event.detail.songs
+            this.#queue.push(...songs)
+
+            if (this.#queue.length > 0) {
+                this.#playNextSong()
+            }
+        })
+
+        this.#audio.addEventListener('ended', () => {
+            this.#playButton.src = '/play-icon.svg'
+            this.#playNextSong()
+        })
+    }
+
+    #handleRepeat() {
+        if (this.#repeat) {
+            this.#repeat = false
+            this.#repeatButton.classList.remove('font-bold', 'text-sky-800')
+        } else {
+            this.#repeat = true
+            this.#repeatButton.classList.add('font-bold', 'text-sky-800')
+        }
+    }
+
+    async #playNextSong() {
+        if (this.#queue.length > 0) {
+            const nextSong = this.#queue.shift()
+
+            if (this.#actualSong) {
+                this.#playedSongs.push(this.#actualSong)
+            }
+
+            this.#actualSong = nextSong
+            await this.#getSong(nextSong.idsong)
+
+            console.log("queue")
+            console.log(this.#queue)
+            console.log("played")
+            console.log(this.#playedSongs)
+
+            this.#audio.src = this.#song.preview
+            this.#audio.play()
+            this.#playButton.src = '/pause-icon.svg'
+            this.#printSong(nextSong)
+        }
+        else {
+            if (this.#repeat) {
+                this.#queue = this.#playedSongs
+                this.#playedSongs = []
+                this.#playNextSong()
+            }
+        }
+    }
+
+    async #playPrevSong() {
+        if (this.#playedSongs.length > 0) {
+            const prevSong = this.#playedSongs.pop()
+            await this.#getSong(prevSong.idsong)
+            this.#audio.src = this.#song.preview
+            this.#audio.play()
+            this.#playButton.src = '/pause-icon.svg'
+            this.#printSong(prevSong)
+
+            if (this.#actualSong) {
+                this.#queue.unshift(this.#actualSong)
+            }
+
+            this.#actualSong = prevSong
+
+            console.log("queue")
+            console.log(this.#queue)
+            console.log("played")
+            console.log(this.#playedSongs)
+        }
     }
 
     #printSong(details) {
-        this.shadowRoot.getElementById("title").textContent = details.cardName
-        this.shadowRoot.getElementById("artist").textContent = details.cardArtist
-        this.shadowRoot.getElementById("image").src = details.cardImage
+        this.shadowRoot.getElementById("title").textContent = details.name
+        this.shadowRoot.getElementById("artist").textContent = details.singers
+        this.shadowRoot.getElementById("image").classList.remove("hidden")
+        this.shadowRoot.getElementById("image").src = details.image
     }
 
     async #getSong(id) {
@@ -57,7 +162,7 @@ export class Player extends HTMLElement {
     }
 
     #seek(event, audio, progress) {
-        const rect = progress.getBoundingClientRect();
+        const rect = this.#progress.getBoundingClientRect()
         const clickPositionInPixels = event.clientX - rect.left;
         const progressBarWidthInPixels = rect.width;
         const clickPositionRatio = clickPositionInPixels / progressBarWidthInPixels;

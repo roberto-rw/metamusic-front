@@ -6,15 +6,17 @@ template.innerHTML = html
 
 export class Searchbar extends HTMLElement {
     #searchbar
+    #songMenu
+
     constructor() {
         super()
         const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(template.content.cloneNode(true))
         this.#searchbar = this.shadowRoot.querySelector('#searchbar')
+        this.#songMenu = document.querySelector('song-menu')
     }
 
     connectedCallback() {
-
         this.#searchbar.addEventListener('keyup', () => this.#printSearchResults())
     }
 
@@ -38,14 +40,19 @@ export class Searchbar extends HTMLElement {
         songCard.setAttribute('artist', song.singers)
         songCard.setAttribute('idsong', song.idsong)
 
-        // Crear el menú
-        const songMenu = document.querySelector('song-menu')
-
         // Mostrar el menú al hacer clic derecho en songCard
         songCard.addEventListener('contextmenu', (event) => {
-            event.preventDefault()
-            songMenu.show(event)
-        })
+            event.preventDefault();
+
+            const songDetails = {
+                cardId: songCard.getAttribute('idsong'),
+                cardName: songCard.getAttribute('name'),
+                cardArtist: songCard.getAttribute('artist'),
+                cardImage: songCard.getAttribute('img')
+            }
+
+            this.#songMenu.show(event, songDetails); // Use this.#songMenu instead of songMenu
+        });
 
         return songCard
     }
