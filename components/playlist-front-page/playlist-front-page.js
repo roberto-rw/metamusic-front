@@ -34,13 +34,32 @@ export class PlaylistFrontPage extends HTMLElement {
     }
 
     #handlePlayPlaylist() {
+        this.#handlePlaylistHistory()
+
         this.dispatchEvent(new CustomEvent('addSongsQueue', {
             detail: {
                 songs: this.#songs
             },
             bubbles: true,
             composed: true
-        }));
+        }))
+    }
+
+    #handlePlaylistHistory() {
+        let playlistHistorial = JSON.parse(localStorage.getItem('playlist-historial')) || []
+        const playlist = {
+            img: this.getAttribute('image'),
+            name: this.getAttribute('name')
+        }
+
+        const index = playlistHistorial.findIndex(pl => pl.name === playlist.name);
+
+        if (index !== -1) {
+            playlistHistorial.splice(index, 1);
+        }
+
+        playlistHistorial.unshift(playlist);
+        localStorage.setItem('playlist-historial', JSON.stringify(playlistHistorial));
     }
 
     #setTitle() {
@@ -60,8 +79,8 @@ export class PlaylistFrontPage extends HTMLElement {
         const songs = JSON.parse(this.getAttribute('songs'))
         this.#songs = songs
         songs.forEach(song => {
-            const songCard = this.#createSongCard(song);
-            this.#songsContainer.appendChild(songCard);
+            const songCard = this.#createSongCard(song)
+            this.#songsContainer.appendChild(songCard)
         });
     }
 

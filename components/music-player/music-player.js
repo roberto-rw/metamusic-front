@@ -47,7 +47,7 @@ export class Player extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.#audio.volume = 0.1
+        this.#audio.volume = 0.3
         this.#playButton.addEventListener('click', () => this.#togglePlay(this.#audio))
         this.#audio.addEventListener('timeupdate', () => this.#updateProgress(this.#audio, this.#progress))
         this.#progressContainer.addEventListener('click', (event) => this.#seek(event, this.#audio, this.#progress))
@@ -82,6 +82,16 @@ export class Player extends HTMLElement {
             }
         })
 
+        document.addEventListener('logout', async (event) => {
+            this.#queue = []
+            this.#playedSongs = []
+            this.#actualSong = null
+            this.#audio.src = ''
+
+            this.#audio.pause()
+            this.#audio.currentTime = 0
+        })
+
         this.#audio.addEventListener('ended', () => {
             this.#playButton.src = '/play-icon.svg'
             this.#playNextSong()
@@ -109,11 +119,6 @@ export class Player extends HTMLElement {
             this.#actualSong = nextSong
             await this.#getSong(nextSong.idsong)
 
-            console.log("queue")
-            console.log(this.#queue)
-            console.log("played")
-            console.log(this.#playedSongs)
-
             this.#audio.src = this.#song.preview
             this.#audio.play()
             this.#playButton.src = '/pause-icon.svg'
@@ -121,6 +126,8 @@ export class Player extends HTMLElement {
         }
         else {
             if (this.#repeat) {
+                this.#playedSongs.push(this.#actualSong)
+                this.#actualSong = null
                 this.#queue = this.#playedSongs
                 this.#playedSongs = []
                 this.#playNextSong()
@@ -142,11 +149,6 @@ export class Player extends HTMLElement {
             }
 
             this.#actualSong = prevSong
-
-            console.log("queue")
-            console.log(this.#queue)
-            console.log("played")
-            console.log(this.#playedSongs)
         }
     }
 
@@ -188,7 +190,7 @@ export class Player extends HTMLElement {
     }
 
     #updateVolume(audio, volumeControl) {
-        audio.volume = volumeControl.value * 0.1
+        audio.volume = volumeControl.value * 0.3
         volumeControl.style.setProperty('--volume-percentage', `${volumeControl.value * 100}%`)
     }
 

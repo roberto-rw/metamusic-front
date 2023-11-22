@@ -5,22 +5,11 @@ export class PlaylistCard extends HTMLElement {
     }
 
     async connectedCallback() {
-        const doc = await this.loadTemplate();
-        this.updateImage(doc);
-        this.updateName(doc);
-        this.appendStyles(doc);
-        this.appendContent(doc);
-
-        this.addEventListener('click', () => {
-            console.log('card clicked');
-            this.dispatchEvent(new CustomEvent('cardSelected', {
-                detail: {
-                    cardId: this.getAttribute('id')
-                },
-                bubbles: true,
-                composed: true
-            }));
-        });
+        const doc = await this.loadTemplate()
+        this.updateImage(doc)
+        this.updateName(doc)
+        this.appendStyles(doc)
+        this.appendContent(doc)
     }
 
     async loadTemplate() {

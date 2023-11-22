@@ -6,53 +6,57 @@
   <audio id="audio" src="/test.mp3"></audio>
   <div class="flex justify-between w-full h-full px-4">
     <!-- Contenedor de la imagen, canción, título y el artista -->
-    <div class="flex-1 flex items-center">
+    <div class="mr-10 lg:flex-1 md:flex items-center hidden">
       <img
         id="image"
         src=""
         alt="Song Image"
         class="w-16 h-16 rounded-md hidden"
       />
-      <div class="ml-4">
+      <div class="ml-4 hidden lg:block">
         <h2 id="title" class="text-white text-lg"></h2>
         <p id="artist" class="text-gray-400 text-sm"></p>
       </div>
     </div>
     <!-- ================================================================= -->
 
-    <div class="flex-1 flex flex-col items-center justify-center">
+    <div
+      class="flex-initial lg:flex-1 flex flex-col items-center justify-center"
+    >
       <div class="flex items-center justify-center">
-        <button id="random-songs" class="mx-4">
-          <span class="w-1/2 h-auto md:w-6 md:h-6"> random </span>
+        <button id="random-songs" class="mx-2 md:mx-4 font-thin">
+          <span class="w-3 h-3 text-xs md:text-base md:w-6 md:h-6">
+            random
+          </span>
         </button>
-        <button id="prev-song" class="mx-4">
+        <button id="prev-song" class="mx-2 md:mx-4">
           <img
             src="/previous-icon.png"
             alt="Back Icon"
-            class="w-1/2 h-auto md:w-6 md:h-6"
+            class="w-3 h-3 lg:w-4 lg:h-4 xl:w-6 xl:h-6"
           />
         </button>
-        <button class="mx-4">
+        <button class="mx-2 md:mx-4">
           <img
             src="/play-icon.svg"
             alt="playBtn"
-            class="w-full h-auto md:w-10 md:h-10 transition-opacity duration-300"
+            class="w-5 h-5 lg:w-6 lg:h-6 xl:w-10 xl:h-10 transition-opacity duration-300"
           />
         </button>
-        <button id="next-song" class="mx-4">
+        <button id="next-song" class="mx-2 md:mx-4">
           <img
             src="/next-icon.png"
             alt="Forward Icon"
-            class="w-1/2 h-auto md:w-6 md:h-6"
+            class="w-3 h-3 lg:w-4 lg:h-4 xl:w-6 xl:h-6"
           />
         </button>
-        <button id="repeat-songs" class="mx-4">
-          <span class="w-1/2 h-auto md:w-6 md:h-6"> repeat </span>
+        <button id="repeat-songs" class="mx-2 md:mx-4">
+          <span class="w-3 h-3 text-xs md:text-sm lg:text-base"> repeat </span>
         </button>
       </div>
       <div
         id="progressContainer"
-        class="mt-5 w-full h-1 rounded-full bg-darkfont"
+        class="mt-5 w-3/4 md:w-full h-1 rounded-full bg-darkfont"
       >
         <div
           id="progress"
@@ -61,8 +65,8 @@
         ></div>
       </div>
     </div>
-    <div class="flex-1 flex items-center justify-end mr-7">
-      <div id="fullscreen" class="mr-10 hover:cursor-pointer">
+    <div class="lg:flex-1 flex items-center justify-end md:mr-7">
+      <div id="fullscreen" class="hover:cursor-pointer">
         <svg
           width="48"
           height="48"

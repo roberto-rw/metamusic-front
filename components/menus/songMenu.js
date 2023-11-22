@@ -40,6 +40,11 @@ export class SongMenu extends HTMLElement {
                 }
             }, 500)
         })
+
+        document.addEventListener('playlistCreated', (event) => {
+            this.playlists.push(event.detail.playlist)
+        })
+
     }
 
     async getPlaylists() {
@@ -49,21 +54,20 @@ export class SongMenu extends HTMLElement {
     showPlaylists(playlists) {
         const playlistsElement = this.shadowRoot.querySelector('#playlists')
 
-        // Clear playlistsElement
         while (playlistsElement.firstChild) {
             playlistsElement.removeChild(playlistsElement.firstChild);
         }
 
         playlists.forEach((playlist, index) => {
             const div = document.createElement('div');
-            div.className = 'p-2 cursor-pointer bg-gray-500';
-            div.dataset.index = index;
-            div.textContent = playlist.name;
+            div.className = 'p-2 hover:cursor-pointer'
+            div.dataset.index = index
+            div.textContent = playlist.name
 
-            div.addEventListener('click', () => this.onPlaylistClick(playlist._id));
+            div.addEventListener('click', () => this.onPlaylistClick(playlist._id))
 
-            playlistsElement.appendChild(div);
-        });
+            playlistsElement.appendChild(div)
+        })
         playlistsElement.classList.remove('hidden')
     }
 

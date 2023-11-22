@@ -21,6 +21,11 @@ export class Sidebar extends HTMLElement {
 
     #handleLogout() {
         logoutController()
+        localStorage.removeItem('playlist-historial')
+        this.dispatchEvent(new CustomEvent('logout', {
+            bubbles: true,
+            composed: true
+        }))
     }
 
 }
