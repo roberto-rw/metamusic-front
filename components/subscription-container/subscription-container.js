@@ -25,8 +25,6 @@ export class SubscriptionContainer extends HTMLElement {
         subscriptions.forEach(subscription => {
             const subscriptionCard = this.#createSubscriptionCard(subscription)
             subscriptionsContainer.appendChild(subscriptionCard)
-            console.log(subscriptionCard)
-            console.log("subscriptionCard added")
         })
     }
 
