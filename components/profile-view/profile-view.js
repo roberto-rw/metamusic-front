@@ -10,7 +10,10 @@ export class ProfileView extends HTMLElement{
     }
 
     connectedCallback() {
-        
+        const username = this.shadowRoot.querySelector('#username');
+        const email = this.shadowRoot.querySelector('#email');
+        username.textContent = sessionStorage.getItem('username');
+        email.textContent = sessionStorage.getItem('email');
     }
 }
 

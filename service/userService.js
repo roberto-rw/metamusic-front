@@ -13,7 +13,8 @@ export async function login(username, password) {
     let response = await fetch(ENDPOINTS.USER_URL + "login", options)
     let json = await response.json()
     if (json.success) {
-        sessionStorage.setItem('username', username);
+        sessionStorage.setItem('username', json.username);
+        sessionStorage.setItem('email', json.email)
     }
     return json
 }
