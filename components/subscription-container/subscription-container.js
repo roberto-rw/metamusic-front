@@ -4,8 +4,7 @@ const html = await (await fetch('../assets/subscription-container.html')).text()
 template.innerHTML = html
 
 export class SubscriptionContainer extends HTMLElement {
-    // #subscriptionsContainer
-    // #containerTitle
+
     constructor() {
         super()
         const shadow = this.attachShadow({ mode: 'open' })

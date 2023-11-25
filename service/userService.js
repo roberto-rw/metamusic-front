@@ -66,11 +66,14 @@ export async function register(username, password, email) {
     return json
 }
 
-export async function subscribe(subscription){
+export async function subscribe(subscriptionData){
     const options = {
         method: "POST",
         credentials: 'include',
-        body: JSON.stringify(subscription)
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(subscriptionData)
     }
     let response = await fetch(ENDPOINTS.USER_URL + "subscribe", options)
     let json = await response.json()
