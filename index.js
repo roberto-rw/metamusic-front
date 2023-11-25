@@ -16,5 +16,7 @@ import { Login } from "./components/login/login.js"
 import { SignupModal } from "./components/modals/signup-modal.js"
 import { AddPlaylistModal } from "./components/modals/add-playlist-modal.js"
 import { SongMenu } from "./components/menus/songMenu.js"
+import { SubscriptionContainer } from "./components/subscription-container/subscription-container.js"
+import { SubscriptionCard } from "./components/subscription-card/subscription-card.js"
 
 import page from "./routes/Router.js"

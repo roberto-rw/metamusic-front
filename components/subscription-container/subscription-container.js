@@ -1,10 +1,11 @@
 import { getSubscriptions } from "../../service/subcriptionService"
-
 const template = document.createElement('template')
 const html = await (await fetch('../assets/subscription-container.html')).text()
 template.innerHTML = html
 
 export class SubscriptionContainer extends HTMLElement {
+    // #subscriptionsContainer
+    // #containerTitle
     constructor() {
         super()
         const shadow = this.attachShadow({ mode: 'open' })
@@ -12,12 +13,12 @@ export class SubscriptionContainer extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log("subscription-container added")
         this.#printSubscriptions()
     }
 
     async #printSubscriptions() {
-        const subscriptionsContainer = document.querySelector('#subscriptions-container')
+        const subscriptionsContainer = this.shadowRoot.querySelector('#subscriptions-container')
+        console.log(subscriptionsContainer)
         subscriptionsContainer.innerHTML = ''
         let subscriptions = await getSubscriptions()
         console.log(subscriptions)

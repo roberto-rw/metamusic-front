@@ -10,7 +10,9 @@ export class SubscriptionCard extends HTMLElement {
     }
 
     connectedCallback() {
-        
+        this.shadowRoot.querySelector('#type').textContent = this.getAttribute('type');
+        this.shadowRoot.querySelector('#cost').textContent = `$ ${this.getAttribute('cost')}`;
+        this.shadowRoot.querySelector('#duration').textContent = `${this.getAttribute('duration')} days`;
     }
 }   
 
