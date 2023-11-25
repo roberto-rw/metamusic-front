@@ -1,44 +1,10 @@
 <link rel="stylesheet" href="/tailwind.css" />
-<div
-  class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-50"
-  id="user"
->
-  <div class="relative w-full max-w-md max-h-full">
-    <!-- Modal content -->
-    <div class="relative bg-darkfont rounded-md shadow">
-      <!-- Modal header -->
-      <div
-        class="flex items-center justify-between p-5 border-b border-neutral-950 rounded-t"
-      >
-        <h3 class="text-xl font-medium text-white" id="title-alerta">User</h3>
-        <button
-          type="button"
-          id="btn-close-user"
-          class="inline-flex items-center justify-center w-8 h-8 ml-auto text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900"
-        >
-          <svg
-            class="w-3 h-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-            />
-          </svg>
-        </button>
-      </div>
-      <!-- Modal body -->
-      <div class="p-6 space-y-6">
-        <p class="text-base leading-relaxed text-white" id="mensaje-alerta">
-          <slot> Subscription: Meta</slot>
-        </p>
-      </div>
-    </div>
+
+<div id="user-modal" class=" absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white">
+  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Ver perfil</a>
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Cambiar suscripción</a>
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Configuración</a>
   </div>
 </div>
+
