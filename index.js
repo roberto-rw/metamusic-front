@@ -18,5 +18,6 @@ import { AddPlaylistModal } from "./components/modals/add-playlist-modal.js"
 import { SongMenu } from "./components/menus/songMenu.js"
 import { SubscriptionContainer } from "./components/subscription-container/subscription-container.js"
 import { SubscriptionCard } from "./components/subscription-card/subscription-card.js"
+import { ProfileView } from "./components/profile-view/profile-view.js"
 
 import page from "./routes/Router.js"

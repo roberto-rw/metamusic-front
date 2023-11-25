@@ -3,6 +3,7 @@ import { loadPlaylistsPage, deployPlaylist } from '../controllers/playlistContro
 import { homeController } from '../controllers/userController.js'
 import { loadSearchSongPage } from '../controllers/songController.js'
 import { loadSubscriptionPage } from '../controllers/subscriptionController.js'
+import { profileController } from '../controllers/userController.js'
 
 page('/', homeController)
 
@@ -11,6 +12,7 @@ page('/playlist', loadPlaylistsPage)
 //page('/song', playlistController.songController)
 page('/search', loadSearchSongPage)
 page('/subscription', loadSubscriptionPage)
+page('/profile', profileController)
 
 document.addEventListener('DOMContentLoaded', (event) => {
     page.start()

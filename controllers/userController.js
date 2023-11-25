@@ -35,3 +35,12 @@ export async function logoutController() {
         console.error('Error logging out:', response.error)
     }
 }
+
+export async function profileController(){
+    if (await isAuthenticated()) {
+        const html = await fetch("/pages/profile.html").then((data) => data.text())
+        document.getElementById("content").innerHTML = html
+    } else {
+        page.redirect('/')
+    }
+}
