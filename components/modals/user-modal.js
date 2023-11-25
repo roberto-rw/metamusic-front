@@ -10,15 +10,14 @@ export class UserModal extends HTMLElement {
         const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(template.content.cloneNode(true))
 
-        this.#userMenu = this.shadowRoot.getElementById('user-menu')
+        this.#userMenu = this.shadowRoot.getElementById('user-modal')
     }
 
-    connectedCallback() {
-        
-    }
+    connectedCallback() {}
 
     toggleUserMenu() {
         this.#userMenu.classList.toggle('hidden')
+        console.log('toggleUserMenu')
     }
 }
 

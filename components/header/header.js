@@ -13,12 +13,12 @@ export class Header extends HTMLElement {
     connectedCallback() {
         const userIcon = this.shadowRoot.querySelector('#user-icon');
         const userSalute = this.shadowRoot.querySelector('#user-salute');
+        const userModal = this.shadowRoot.querySelector('#user-modal');
 
         userSalute.textContent = "Good morning, " + sessionStorage.getItem('username') + "!";
 
         userIcon.addEventListener('click', () => {
-            const userModal = document.querySelector('#user-modal');
-            userModal.classList.toggle('hidden');
+            userModal.toggleUserMenu();
         });
     }
 
