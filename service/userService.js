@@ -66,41 +66,52 @@ export async function register(username, password, email) {
     return json
 }
 
-
-// Playlist requests
-export async function getPlaylistUsername(username) {
-    const options = {
-        method: "GET",
-        headers: {
-        },
-    }
-    let response = await fetch((ENDPOINTS.PLAYLIST_URL + "search/byuser/" + username), options)
-    let json = await response.json()
-    return json
-}
-
-export async function createPlaylist(name, description, image, username) {
+export async function subscribe(subscription){
     const options = {
         method: "POST",
         credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, description, image, user: { username } })
+        body: JSON.stringify(subscription)
     }
-    let response = await fetch(ENDPOINTS.PLAYLIST_URL, options)
+    let response = await fetch(ENDPOINTS.USER_URL + "subscribe", options)
     let json = await response.json()
     return json
 }
 
-//test
-export async function getPlaylistSongs() {
-    const options = {
-        method: "GET",
-        headers: {
-        },
-    }
-    let response = await fetch(("http://localhost:3000/song/"), options)
-    let json = await response.json()
-    return json
-}
+
+// // Playlist requests
+// export async function getPlaylistUsername(username) {
+//     const options = {
+//         method: "GET",
+//         headers: {
+//         },
+//     }
+//     let response = await fetch((ENDPOINTS.PLAYLIST_URL + "search/byuser/" + username), options)
+//     let json = await response.json()
+//     return json
+// }
+
+// export async function createPlaylist(name, description, image, username) {
+//     const options = {
+//         method: "POST",
+//         credentials: 'include',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ name, description, image, user: { username } })
+//     }
+//     let response = await fetch(ENDPOINTS.PLAYLIST_URL, options)
+//     let json = await response.json()
+//     return json
+// }
+
+// //test
+// export async function getPlaylistSongs() {
+//     const options = {
+//         method: "GET",
+//         headers: {
+//         },
+//     }
+//     let response = await fetch(("http://localhost:3000/song/"), options)
+//     let json = await response.json()
+//     return json
+// }
