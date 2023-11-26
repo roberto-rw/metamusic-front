@@ -54,8 +54,7 @@ export class PlaylistsContent extends HTMLElement {
         const playlistCard = document.createElement('playlistcard2-comp')
         playlistCard.setAttribute('img', playlist.image)
         playlistCard.setAttribute('name', playlist.name)
-        playlistCard.setAttribute('id', '1955330657')
-
+        playlistCard.setAttribute('id', playlist._id)
         return playlistCard
     }
 }

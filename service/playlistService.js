@@ -62,3 +62,17 @@ export async function addSongToPlaylist(idplaylist, idsong) {
     let json = await response.json()
     return json
 }
+
+export async function removeSongFromPlaylist(idplaylist, idsong){
+    const options = {
+        method: "PUT",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ idsong })
+    }
+    let response = await fetch(`${ENDPOINTS.PLAYLIST_URL}/update/removesong/${idplaylist}`, options)
+    let json = await response.json()
+    return json
+}

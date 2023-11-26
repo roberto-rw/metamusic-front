@@ -20,5 +20,6 @@ import { SubscriptionContainer } from "./components/subscription-container/subsc
 import { SubscriptionCard } from "./components/subscription-card/subscription-card.js"
 import { ProfileView } from "./components/profile-view/profile-view.js"
 import { EditProfile } from "./components/edit-profile-view/edit-profile.js"
+import { RemoveSongMenu } from "./components/menus/removeSongMenu.js"
 
 import page from "./routes/Router.js"

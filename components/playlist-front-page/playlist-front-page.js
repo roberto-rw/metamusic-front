@@ -4,13 +4,14 @@ template.innerHTML = html
 
 export class PlaylistFrontPage extends HTMLElement {
     #songsContainer
+    #playlistId
     #titleElement
     #authorElement
     #imageElement
     #imagebgElement
     #playPlaylistButton
     #songs = []
-
+    #removeSongMenu
 
     constructor() {
         super();
@@ -22,6 +23,7 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#imageElement = this.shadowRoot.querySelector('#image')
         this.#imagebgElement = this.shadowRoot.querySelector('#image-bg')
         this.#playPlaylistButton = this.shadowRoot.querySelector('#playPlaylist')
+        this.#removeSongMenu = document.querySelector('remove-song-menu')
     }
 
     async connectedCallback() {
@@ -29,6 +31,7 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#setTitle()
         this.#setAuthor()
         this.#setImage()
+        this.#setId()
 
         this.#playPlaylistButton.addEventListener('click', () => this.#handlePlayPlaylist())
     }
@@ -75,6 +78,10 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#imagebgElement.setAttribute('style', `background-image: url(${this.getAttribute('image')})`)
     }
 
+    #setId() { 
+        this.#playlistId = this.getAttribute('id')
+    }
+
     #createSongCards() {
         const songs = JSON.parse(this.getAttribute('songs'))
         this.#songs = songs
@@ -91,6 +98,13 @@ export class PlaylistFrontPage extends HTMLElement {
         songCard.setAttribute('duration', song.duration)
         songCard.setAttribute('artist', song.singers)
         songCard.setAttribute('idsong', song.idsong)
+
+        songCard.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+
+            this.#removeSongMenu.show(event, songCard.getAttribute('idsong'), this.#playlistId);
+        });
+
         return songCard
     }
 }

@@ -26,6 +26,7 @@ export async function deployPlaylist(ctx) {
         playlistComp.setAttribute('description', playlist.description)
         playlistComp.setAttribute('image', playlist.image)
         playlistComp.setAttribute('songs', JSON.stringify(playlist.songs))
+        playlistComp.setAttribute('id', playlist._id)
 
         document.getElementById("content").innerHTML = ''
         document.getElementById("content").appendChild(playlistComp)
