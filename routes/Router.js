@@ -4,6 +4,7 @@ import { homeController } from '../controllers/userController.js'
 import { loadSearchSongPage } from '../controllers/songController.js'
 import { loadSubscriptionPage } from '../controllers/subscriptionController.js'
 import { profileController } from '../controllers/userController.js'
+import { editProfileController } from '../controllers/userController.js'
 
 page('/', homeController)
 
@@ -13,6 +14,7 @@ page('/playlist', loadPlaylistsPage)
 page('/search', loadSearchSongPage)
 page('/subscription', loadSubscriptionPage)
 page('/profile', profileController)
+page('/edit-profile', editProfileController)
 
 document.addEventListener('DOMContentLoaded', (event) => {
     page.start()

@@ -44,3 +44,12 @@ export async function profileController(){
         page.redirect('/')
     }
 }
+
+export async function editProfileController(){
+    if (await isAuthenticated()) {
+        const html = await fetch("/pages/edit.html").then((data) => data.text())
+        document.getElementById("content").innerHTML = html
+    } else {
+        page.redirect('/')
+    }
+}

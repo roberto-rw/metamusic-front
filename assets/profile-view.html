@@ -1,11 +1,17 @@
 <link rel="stylesheet" href="/tailwind.css" />
-<div class="flex flex-col md:flex-row items-center p-8 md:pl-96 space-y-4 md:space-y-0 md:space-x-8">
-    <img class="rounded-full w-36 h-36 md:w-64 md:h-64 md:ml-8" src="https://pbs.twimg.com/media/F-9FHs6XIAA5qAY?format=jpg&name=medium" alt="Foto de perfil">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:h-full md:w-full">
-        <div>
-            <h2 id="username" class="text-2xl md:text-5xl text-red-500">Username</h2>
-            <p id="email" class="md:text-lg">user@example.com</p>
+<div class="p-8 md:pl-96">
+    <div class="flex flex-col md:flex-row items-center md:space-x-8">
+        <img class="rounded-full w-24 h-24 md:w-64 md:h-64" src="https://pbs.twimg.com/media/F-9FHs6XIAA5qAY?format=jpg&name=medium" alt="Foto de perfil">
+        <div class="mt-4 md:mt-0 text-center md:text-left">
+            <h2 id="username" class="text-xl md:text-5xl text-red-500">Username</h2>
+            <p id="email" class="text-md md:text-lg">user@example.com</p>
+            <a href="/edit-profile">
+                <button id="edit-profile-button" class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded mt-4">Edit Profile</button>
+            </a>
         </div>
-        <button class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded md:self-center md:mr-60">Edit Profile</button>
+    </div>
+    <div id="liked-songs" class="mt-14">
+        <h2 class="text-lg text-white mb-5">Your liked songs ❤</h2>
+        <!-- Songs -->
     </div>
 </div>
