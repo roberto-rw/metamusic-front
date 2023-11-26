@@ -23,10 +23,10 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#imageElement = this.shadowRoot.querySelector('#image')
         this.#imagebgElement = this.shadowRoot.querySelector('#image-bg')
         this.#playPlaylistButton = this.shadowRoot.querySelector('#playPlaylist')
-        this.#removeSongMenu = document.querySelector('remove-song-menu')
+        this.#removeSongMenu = this.shadowRoot.querySelector('#remove-song-menu')
     }
 
-    async connectedCallback() {
+    connectedCallback() {
         this.#createSongCards()
         this.#setTitle()
         this.#setAuthor()
@@ -34,6 +34,21 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#setId()
 
         this.#playPlaylistButton.addEventListener('click', () => this.#handlePlayPlaylist())
+
+        // Evento lanzado cuando se elimina una canción de la playlist
+        this.addEventListener('songRemoved', (event) => {
+            const newSongs = event.detail;
+            this.#updateSongs(newSongs)
+        });
+    }
+
+    #updateSongs(newSongs) {
+        this.#songsContainer.innerHTML = ''
+        this.#songs = newSongs
+        newSongs.forEach(song => {
+            const songCard = this.#createSongCard(song)
+            this.#songsContainer.appendChild(songCard)
+        });
     }
 
     #handlePlayPlaylist() {
@@ -83,6 +98,7 @@ export class PlaylistFrontPage extends HTMLElement {
     }
 
     #createSongCards() {
+        this.#songsContainer.innerHTML = ''
         const songs = JSON.parse(this.getAttribute('songs'))
         this.#songs = songs
         songs.forEach(song => {

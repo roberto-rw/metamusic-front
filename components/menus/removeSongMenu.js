@@ -45,7 +45,10 @@ export class RemoveSongMenu extends HTMLElement{
     }
 
     async removeSong(){
-        removeSongFromPlaylist(this.playlistId, this.songId)
+        const playlistUpdated = await removeSongFromPlaylist(this.playlistId, this.songId)
+        const songs = playlistUpdated.songs
+        // Emitir un evento personalizado después de que la canción se ha eliminado
+        this.dispatchEvent(new CustomEvent('songRemoved', { bubbles: true, composed: true, detail: songs }));
     }
 }
 
