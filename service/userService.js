@@ -15,6 +15,7 @@ export async function login(username, password) {
     if (json.success) {
         sessionStorage.setItem('username', json.username);
         sessionStorage.setItem('email', json.email)
+        sessionStorage.setItem('id', json.id)
     }
     return json
 }
@@ -77,6 +78,21 @@ export async function subscribe(subscriptionData){
         body: JSON.stringify(subscriptionData)
     }
     let response = await fetch(ENDPOINTS.USER_URL + "subscribe", options)
+    let json = await response.json()
+    return json
+}
+
+export async function editUser(userData){
+    console.log(userData);
+    const options = {
+        method: "PUT",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    }
+    let response = await fetch(ENDPOINTS.USER_URL + sessionStorage.getItem('id'), options)
     let json = await response.json()
     return json
 }
