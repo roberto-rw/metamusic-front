@@ -1,15 +1,28 @@
 <link rel="stylesheet" href="/tailwind.css" />
 <section class="md:pl-32 xl:pl-72 2xl:pl-[22rem] p-8 select-none">
   <article class="flex items-center justify-between mb-8">
-    <a id="title" class="text-2xl font-bold text-white hover:underline">
-      <h2>My playlists</h2>
-    </a>
-    <a
+    <h2 id="title" class="text-2xl font-bold text-white hover:underline">
+      My playlists
+    </h2>
+    <button
       id="add-playlist-link"
-      class="uppercase text-2xl font-bold tracking-[2px] hover:underline mr-6"
+      class="uppercase text-2xl font-bold tracking-[2px] hover:bg-blue-400 mr-6 bg-blue-500 text-white rounded-full p-4"
     >
-      +
-    </a>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="white"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        class="h-6 w-6 lg:h-10 lg:w-10"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        />
+      </svg>
+    </button>
   </article>
   <article class="grid grid-cols-1 gap-6">
     <!--playlist -->
