@@ -1,24 +1,32 @@
 
 # Meta Music
 
-Front-end web application that simulates a music streaming service using JavaScript Web Components, Tailwind with Vite and connects to an external API.
+Front-end web application that simulates a music streaming service using JavaScript Web Components, Tailwind with Vite and connects to an external API. 
 
+## 🎵 Screenshots
+**Login page:**
+![Login](/public/login.jpg)
 
-## Features
+**Home page:**
+![Home](/public/home.jpg) 
 
+**Playlist page:**
+![Playlist](/public/playlist.jpg)
+
+## 🔨 Features
 - Create custom playlists
 - Song queues
 - Volumen control
 
 
-## Tech Stack
+## 👨🏼‍💻 Tech Stack
 
 **Client:** JavaScript Web Components, Tailwind, Vite
 
 **Server:** Node.js, Express.js, JWT, Mongoose
 
 
-## Run Locally
+## 💻 Run Locally
 
 Clone the project
 
@@ -45,14 +53,17 @@ Start the server
 ```
 
 
-## Environment Variables
+## ⚙️ Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
 `VITE_DEEZER_KEY`
 
 
-## Authors
+## 🔗 Links
+- [metamusic-back](https://github.com/Vastem/metamusic-back)
+
+## 🤝 Authors
 
 - [@roberto-rw](https://www.github.com/roberto-rw)
 - [@Vastem](https://www.github.com/Vastem)
