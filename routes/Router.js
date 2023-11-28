@@ -1,4 +1,5 @@
 import page from 'page'
+
 import { loadPlaylistsPage, deployPlaylist } from '../controllers/playlistController.js'
 import { homeController } from '../controllers/userController.js'
 import { loadSearchSongPage } from '../controllers/songController.js'
@@ -15,6 +16,10 @@ page('/search', loadSearchSongPage)
 page('/subscription', loadSubscriptionPage)
 page('/profile', profileController)
 page('/edit-profile', editProfileController)
+page('*', () => {
+    console.log('404')
+    page.redirect('/')
+})
 
 document.addEventListener('DOMContentLoaded', (event) => {
     page.start()
