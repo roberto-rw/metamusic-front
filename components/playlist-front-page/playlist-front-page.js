@@ -8,6 +8,7 @@ export class PlaylistFrontPage extends HTMLElement {
     #titleElement
     #authorElement
     #imageElement
+    #imageContainer
     #imagebgElement
     #playPlaylistButton
     #songs = []
@@ -21,6 +22,7 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#titleElement = this.shadowRoot.querySelector('#title')
         this.#authorElement = this.shadowRoot.querySelector('#author')
         this.#imageElement = this.shadowRoot.querySelector('#image')
+        this.#imageContainer = this.shadowRoot.querySelector('#playlist-image-container')
         this.#imagebgElement = this.shadowRoot.querySelector('#image-bg')
         this.#playPlaylistButton = this.shadowRoot.querySelector('#playPlaylist')
         this.#removeSongMenu = this.shadowRoot.querySelector('#remove-song-menu')
@@ -34,12 +36,13 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#setId()
 
         this.#playPlaylistButton.addEventListener('click', () => this.#handlePlayPlaylist())
+        this.#imageContainer.addEventListener('click', () => this.#handleEditPlaylist())
 
         // Evento lanzado cuando se elimina una canción de la playlist
         this.addEventListener('songRemoved', (event) => {
-            const newSongs = event.detail;
+            const newSongs = event.detail
             this.#updateSongs(newSongs)
-        });
+        })
     }
 
     #updateSongs(newSongs) {
@@ -49,6 +52,14 @@ export class PlaylistFrontPage extends HTMLElement {
             const songCard = this.#createSongCard(song)
             this.#songsContainer.appendChild(songCard)
         });
+    }
+
+    #handleEditPlaylist() {
+        const editPlaylistModal = document.querySelector('edit-playlist-modal')
+        if (editPlaylistModal) {
+            editPlaylistModal.setAttribute('playlist', JSON.stringify({ name: this.getAttribute('name'), description: this.getAttribute('description'), image: this.getAttribute('image'), id: this.getAttribute('id') }))
+            editPlaylistModal.open = 'true'
+        }
     }
 
     #handlePlayPlaylist() {
@@ -93,7 +104,7 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#imagebgElement.setAttribute('style', `background-image: url(${this.getAttribute('image')})`)
     }
 
-    #setId() { 
+    #setId() {
         this.#playlistId = this.getAttribute('id')
     }
 

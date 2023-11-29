@@ -21,5 +21,6 @@ import { SubscriptionCard } from "./components/subscription-card/subscription-ca
 import { ProfileView } from "./components/profile-view/profile-view.js"
 import { EditProfile } from "./components/edit-profile-view/edit-profile.js"
 import { RemoveSongMenu } from "./components/menus/removeSongMenu.js"
+import { EditPlaylistModal } from "./components/modals/edit-playlist-modal.js"
 
 import page from "./routes/Router.js"

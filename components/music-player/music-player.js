@@ -14,6 +14,7 @@ export class Player extends HTMLElement {
     #queue
     #playedSongs
     #repeat
+    #repeatImg
 
     #audio
     #playButton
@@ -44,6 +45,7 @@ export class Player extends HTMLElement {
         this.#nextButton = this.shadowRoot.getElementById('next-song')
         this.#prevButton = this.shadowRoot.getElementById('prev-song')
         this.#repeatButton = this.shadowRoot.getElementById('repeat-songs')
+        this.#repeatImg = this.shadowRoot.getElementById('repeat-img')
     }
 
     async connectedCallback() {
@@ -101,10 +103,10 @@ export class Player extends HTMLElement {
     #handleRepeat() {
         if (this.#repeat) {
             this.#repeat = false
-            this.#repeatButton.classList.remove('font-bold', 'text-sky-800')
+            this.#repeatImg.src = '/repeat.svg'
         } else {
             this.#repeat = true
-            this.#repeatButton.classList.add('font-bold', 'text-sky-800')
+            this.#repeatImg.src = '/repeat-active.svg'
         }
     }
 
