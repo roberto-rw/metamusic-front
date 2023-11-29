@@ -11,12 +11,23 @@
         class="flex flex-col items-center justify-center absolute w-full h-full lg:flex-row lg:items-center lg:justify-between lg:px-20"
       >
         <div class="flex flex-row items-center space-x-4">
-          <img
-            id="image"
-            src="https://i.ibb.co/W6nStSF/ddf740b5-fd3a-4cfc-b13f-81e36225066f.jpg"
-            alt=""
-            class="w-48 h-48 object-cover rounded-lg ml-4 mt-4 lg:w-64 lg:h-64 lg:ml-0 lg:mt-0"
-          />
+          <div
+            id="playlist-image-container"
+            class="relative group hover:cursor-pointer"
+          >
+            <img
+              id="image"
+              src="https://i.ibb.co/W6nStSF/ddf740b5-fd3a-4cfc-b13f-81e36225066f.jpg"
+              alt=""
+              class="w-48 h-48 object-cover rounded-lg ml-4 mt-4 lg:w-64 lg:h-64 lg:ml-0 lg:mt-0 transition duration-200 ease-in-out filter transform group-hover:z-10 group-hover:brightness-50"
+            />
+            <img
+              id="pencil-icon"
+              src="/edit.svg"
+              alt="Edit"
+              class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-44 h-44 object-cover rounded-lg opacity-0 group-hover:opacity-100"
+            />
+          </div>
           <div class="ml-4 mt-4 lg:ml-8 lg:mt-0">
             <h2 class="text-white text-lg font-bold lg:text-xl">PLAYLIST</h2>
             <h1 id="title" class="text-white text-3xl font-bold lg:text-5xl">
