@@ -1,6 +1,6 @@
 import page from "page"
 import { updatePlaylist } from "../../service/playlistService.js"
-import { uploadImage } from "../../service/cloudinaryService.js"
+import { uploadImagePlaylist } from "../../service/cloudinaryService.js"
 
 const template = document.createElement('template')
 const html = await (await fetch('../assets/modals/edit-playlist-modal.html')).text()
@@ -73,7 +73,7 @@ export class EditPlaylistModal extends HTMLElement {
             let image
 
             if (this.#imagePreview.src !== this.#originalImage) {
-                image = await uploadImage(this.#imagePreview.src, username)
+                image = await uploadImagePlaylist(this.#imagePreview.src, username)
             } else {
                 console.log('no se ha cambiado la imagen')
                 image = this.#originalImage
