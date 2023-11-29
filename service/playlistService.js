@@ -3,6 +3,7 @@ import { ENDPOINTS } from "../config/endpoints"
 export async function getPlaylistByUsername(username) {
     const options = {
         method: "GET",
+        credentials: 'include',
         headers: {
         },
     }
@@ -37,6 +38,21 @@ export async function createPlaylist(name, description, image, username) {
     return json
 }
 
+export async function updatePlaylist(idplaylist, name, description, image, username) {
+    const options = {
+        method: "PUT",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, description, image, user: { username } })
+    }
+    let response = await fetch((ENDPOINTS.PLAYLIST_URL + idplaylist), options)
+    let json = await response.json()
+    return json
+
+}
+
 export async function deletePlaylist(idplaylist) {
     const options = {
         method: "DELETE",
@@ -63,7 +79,7 @@ export async function addSongToPlaylist(idplaylist, idsong) {
     return json
 }
 
-export async function removeSongFromPlaylist(idplaylist, idsong){
+export async function removeSongFromPlaylist(idplaylist, idsong) {
     const options = {
         method: "PUT",
         credentials: 'include',
