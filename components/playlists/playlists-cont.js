@@ -7,6 +7,7 @@ export class PlaylistsContent extends HTMLElement {
     #playlistContainer
     #titleElement
     #addLink
+    #removePlaylistMenu
 
     constructor() {
         super()
@@ -14,7 +15,8 @@ export class PlaylistsContent extends HTMLElement {
         shadow.appendChild(template.content.cloneNode(true))
         this.#playlistContainer = this.shadowRoot.querySelector('article.grid')
         this.#titleElement = this.shadowRoot.querySelector('#title')
-        this.#addLink = this.shadowRoot.querySelector('#add-playlist-link');
+        this.#addLink = this.shadowRoot.querySelector('#add-playlist-link')
+        this.#removePlaylistMenu = this.shadowRoot.querySelector('#remove-playlist-menu')
     }
 
     async connectedCallback() {
@@ -55,6 +57,12 @@ export class PlaylistsContent extends HTMLElement {
         playlistCard.setAttribute('img', playlist.image)
         playlistCard.setAttribute('name', playlist.name)
         playlistCard.setAttribute('id', playlist._id)
+
+        playlistCard.addEventListener('contextmenu', (event) => {
+            event.preventDefault()
+            this.#removePlaylistMenu.show(event, playlist._id)
+        })
+
         return playlistCard
     }
 }
