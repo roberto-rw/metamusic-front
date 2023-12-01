@@ -6,8 +6,12 @@ import { loadSearchSongPage } from '../controllers/songController.js'
 import { loadSubscriptionPage } from '../controllers/subscriptionController.js'
 import { profileController } from '../controllers/userController.js'
 import { editProfileController } from '../controllers/userController.js'
+import { adminLoginController, addSongAdminController } from '../controllers/adminController.js';
 
 page('/', homeController)
+
+page('/admin', adminLoginController);
+page('/addSongAdmin', addSongAdminController);
 
 page('/playlist/:name', deployPlaylist)
 page('/playlist', loadPlaylistsPage)

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MetaMusic</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Include Tailwind CSS -->
+    <link href="/css/login.css" rel="stylesheet" />
+    <link href="/tailwind.css" rel="stylesheet" />
+    <script type="module" src="/components/login/adminLogin.js"></script>
+  </head>
+
+  <body>
+    <main
+      class="max-w-lg mx-auto my-10 bg-transparent p-5 rounded-md shadow-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl"
+    >
+      <section
+        class="flex flex-col items-center justify-center mt-8 mb-16 sm:flex-row"
+      >
+        <img
+          src="/meta-logo.png"
+          alt="Logo"
+          class="h-12 w-16 sm:h-16 sm:w-24"
+        />
+        <h1
+          class="text-3xl font-bold ml-0 mt-4 text-center gradient-text sm:text-5xl sm:ml-8 sm:mt-0"
+        >
+          Meta Music Admin
+        </h1>
+      </section>
+
+      <section class="flex items-center justify-center mb-10">
+        <h2 class="text-2xl font-bold text-white sm:text-3xl">Welcome back!</h2>
+      </section>
+
+      <adminlogin-comp></adminlogin-comp>
+    </main>
+  </body>
+</html>
