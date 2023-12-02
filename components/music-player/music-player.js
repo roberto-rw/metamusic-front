@@ -9,23 +9,26 @@ template.innerHTML = html
 export class Player extends HTMLElement {
     #api
     #song
-
     #actualSong
     #queue
     #playedSongs
     #repeat
     #repeatImg
-
     #audio
     #playButton
     #progress
     #volumeControl
     #progressContainer
     #fullscreenButton
+    #exitFullScreenButton
     #nextButton
     #prevButton
     #repeatButton
-
+    #songDataContainer
+    #musicPlayer
+    #titleArtistContainer
+    #songImage
+    #fullScreenModeActvated
     constructor() {
         super()
         this.#api = new MusicApi()
@@ -46,6 +49,12 @@ export class Player extends HTMLElement {
         this.#prevButton = this.shadowRoot.getElementById('prev-song')
         this.#repeatButton = this.shadowRoot.getElementById('repeat-songs')
         this.#repeatImg = this.shadowRoot.getElementById('repeat-img')
+        this.#songDataContainer = this.shadowRoot.getElementById('song-data-container')
+        this.#musicPlayer = this.shadowRoot.getElementById('music-player')
+        this.#exitFullScreenButton = this.shadowRoot.getElementById('exit-full-screen')
+        this.#titleArtistContainer = this.shadowRoot.getElementById('title-artist-container')
+        this.#songImage = this.shadowRoot.getElementById('image')
+        this.#fullScreenModeActvated = false
     }
 
     async connectedCallback() {
@@ -54,7 +63,6 @@ export class Player extends HTMLElement {
         this.#audio.addEventListener('timeupdate', () => this.#updateProgress(this.#audio, this.#progress))
         this.#progressContainer.addEventListener('click', (event) => this.#seek(event, this.#audio, this.#progress))
         this.#volumeControl.addEventListener('input', () => this.#updateVolume(this.#audio, this.#volumeControl))
-        this.#fullscreenButton.addEventListener('click', () => this.#handleFullscreenClick())
 
         this.#nextButton.addEventListener('click', () => this.#playNextSong())
         this.#prevButton.addEventListener('click', () => this.#playPrevSong())
@@ -98,6 +106,58 @@ export class Player extends HTMLElement {
             this.#playButton.src = '/play-icon.svg'
             this.#playNextSong()
         })
+
+        this.#songDataContainer.addEventListener('click', () => {
+            this.#fullScreenMode()
+        })
+
+        this.#fullscreenButton.addEventListener('click', () => {
+            this.#fullScreenMode()
+        })
+
+        this.#exitFullScreenButton.addEventListener('click', () => {
+            this.#exitFullScreenMode()
+        })
+    }
+
+    #fullScreenMode(){
+        if(!this.#actualSong) return   
+            this.dispatchEvent(new CustomEvent('fullScreenSong', {
+                detail: {
+                    name: this.#actualSong.name,
+                    singers: this.#actualSong.singers,
+                    image: this.#actualSong.image
+                },
+                bubbles: true,
+                composed: true
+            }))
+        
+        this.#musicPlayer.classList.add('h-36')
+        this.#musicPlayer.classList.remove('h-28')
+
+        this.#fullscreenButton.classList.add('hidden')
+        this.#exitFullScreenButton.classList.remove('hidden')
+        this.#titleArtistContainer.classList.add('hidden')
+        this.#songImage.classList.add('hidden')
+        this.#fullScreenModeActvated = true
+    }
+
+    #exitFullScreenMode(){
+        this.#musicPlayer.classList.remove('h-36')
+        this.#musicPlayer.classList.add('h-28')
+
+        this.#fullscreenButton.classList.remove('hidden')
+        this.#exitFullScreenButton.classList.add('hidden')
+        this.#songDataContainer.classList.remove('hidden')
+
+        this.dispatchEvent(new CustomEvent('exitFullScreenSong', {
+            bubbles: true,
+            composed: true
+        }))
+
+        this.#titleArtistContainer.classList.remove('hidden')
+        this.#songImage.classList.remove('hidden')
+        this.#fullScreenModeActvated = false
     }
 
     #handleRepeat() {
@@ -113,14 +173,13 @@ export class Player extends HTMLElement {
     async #playNextSong() {
         if (this.#queue.length > 0) {
             const nextSong = this.#queue.shift()
-
             if (this.#actualSong) {
                 this.#playedSongs.push(this.#actualSong)
             }
 
             this.#actualSong = nextSong
+            this.#dispatchChangeSongEvent()
             await this.#getSong(nextSong.idsong)
-
             this.#audio.src = this.#song.preview
             this.#audio.play()
             this.#playButton.src = '/pause-icon.svg'
@@ -137,6 +196,18 @@ export class Player extends HTMLElement {
         }
     }
 
+    #dispatchChangeSongEvent() {
+        this.dispatchEvent(new CustomEvent('changeSong', {
+            detail: {
+                name: this.#actualSong.name,
+                singers: this.#actualSong.singers,
+                image: this.#actualSong.image
+            },
+            bubbles: true,
+            composed: true
+        }))
+    }
+
     async #playPrevSong() {
         if (this.#playedSongs.length > 0) {
             const prevSong = this.#playedSongs.pop()
@@ -151,14 +222,17 @@ export class Player extends HTMLElement {
             }
 
             this.#actualSong = prevSong
+            this.#dispatchChangeSongEvent()
         }
     }
 
     #printSong(details) {
         this.shadowRoot.getElementById("title").textContent = details.name
         this.shadowRoot.getElementById("artist").textContent = details.singers
-        this.shadowRoot.getElementById("image").classList.remove("hidden")
         this.shadowRoot.getElementById("image").src = details.image
+        
+        if(this.#fullScreenModeActvated) return
+        this.shadowRoot.getElementById("image").classList.remove("hidden")
     }
 
     async #getSong(id) {
@@ -194,10 +268,6 @@ export class Player extends HTMLElement {
     #updateVolume(audio, volumeControl) {
         audio.volume = volumeControl.value * 0.3
         volumeControl.style.setProperty('--volume-percentage', `${volumeControl.value * 100}%`)
-    }
-
-    #handleFullscreenClick() {
-        page.redirect('/song');
     }
 }
 
