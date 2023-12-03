@@ -1,5 +1,4 @@
-import { MusicApi } from "../../service/music-api"
-import page from 'page';
+import { getSong } from "../../service/music-api.js"
 
 const template = document.createElement('template')
 
@@ -7,7 +6,6 @@ const html = await (await fetch('../assets/music-player.html')).text()
 template.innerHTML = html
 
 export class Player extends HTMLElement {
-    #api
     #song
     #actualSong
     #queue
@@ -29,9 +27,9 @@ export class Player extends HTMLElement {
     #titleArtistContainer
     #songImage
     #fullScreenModeActvated
+
     constructor() {
         super()
-        this.#api = new MusicApi()
         this.#song = null
         this.#actualSong = null
         this.#queue = []
@@ -71,8 +69,11 @@ export class Player extends HTMLElement {
 
         document.addEventListener('cardSelected', async (event) => {
             this.#queue = []
+            this.#playedSongs = []
+            this.#actualSong = null
 
             const songDetails = event.detail
+            console.log(songDetails)
             this.#queue.push(songDetails) // Add the song to the queue
 
             // If the queue was empty, start playing the song
@@ -83,6 +84,8 @@ export class Player extends HTMLElement {
 
         document.addEventListener('addSongsQueue', async (event) => {
             this.#queue = []
+            this.#playedSongs = []
+            this.#actualSong = null
 
             const songs = event.detail.songs
             this.#queue.push(...songs)
@@ -120,19 +123,19 @@ export class Player extends HTMLElement {
         })
     }
 
-    #fullScreenMode(){
-        if(!this.#actualSong) return   
-            this.dispatchEvent(new CustomEvent('fullScreenSong', {
-                detail: {
-                    name: this.#actualSong.name,
-                    singers: this.#actualSong.singers,
-                    image: this.#actualSong.image
-                },
-                bubbles: true,
-                composed: true
-            }))
-        
-        this.#musicPlayer.classList.add('h-36')
+    #fullScreenMode() {
+        if (!this.#actualSong) return
+        this.dispatchEvent(new CustomEvent('fullScreenSong', {
+            detail: {
+                name: this.#actualSong.name,
+                singers: this.#actualSong.singers,
+                image: this.#actualSong.image
+            },
+            bubbles: true,
+            composed: true
+        }))
+
+        this.#musicPlayer.classList.add('h-48')
         this.#musicPlayer.classList.remove('h-28')
 
         this.#fullscreenButton.classList.add('hidden')
@@ -142,8 +145,8 @@ export class Player extends HTMLElement {
         this.#fullScreenModeActvated = true
     }
 
-    #exitFullScreenMode(){
-        this.#musicPlayer.classList.remove('h-36')
+    #exitFullScreenMode() {
+        this.#musicPlayer.classList.remove('h-48')
         this.#musicPlayer.classList.add('h-28')
 
         this.#fullscreenButton.classList.remove('hidden')
@@ -230,13 +233,13 @@ export class Player extends HTMLElement {
         this.shadowRoot.getElementById("title").textContent = details.name
         this.shadowRoot.getElementById("artist").textContent = details.singers
         this.shadowRoot.getElementById("image").src = details.image
-        
-        if(this.#fullScreenModeActvated) return
+
+        if (this.#fullScreenModeActvated) return
         this.shadowRoot.getElementById("image").classList.remove("hidden")
     }
 
     async #getSong(id) {
-        this.#song = await this.#api.getSong(id)
+        this.#song = await getSong(id)
     }
 
     #seek(event, audio, progress) {

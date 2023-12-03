@@ -1,91 +1,24 @@
 <link href="/tailwind.css" rel="stylesheet" />
 
-<div
-  id="song-page"
-  class="fixed top-0 left-0 w-screen h-[calc(100vh-9rem)] z-50 bg-cover bg-center relative hidden"
-  style="
-    background-image: url('https://i1.sndcdn.com/artworks-61340eb1-4b14-463e-96b2-9ba3c81441ab-0-t500x500.jpg');
-  "
-> 
-  <div class="h-4/5 relative">
-    <div class="absolute inset-x-0 bottom-0 mb-10 ml-10">
-      <h1 id="song-name" class="text-white text-4xl font-bold">
-        Milo J: Bzrp Music Sessions, Vol. 57
-      </h1>
-      <p id="song-singers" class="text-white text-2xl">Bizarrap, Milo J</p>
-    </div>
-  </div>
-  <!-- <div id="progressContainer" class="w-full h-1 rounded-full bg-darkfont">
-    <div
-      id="progress"
-      class="h-full rounded-full bg-dblue transition-all duration-500 z-50"
-      style="width: 0%"
-    ></div>
-  </div> -->
-  <!-- <div class="h-1/5 flex items-center justify-center">
-    <div class="h-full w-full bg-black">
-      <audio id="audio" src="test.mp3"></audio>
-      <div class="flex justify-between w-full h-full px-4">
-        <div class="flex-1"></div>
-        <div class="flex-1 flex flex-col items-center justify-center">
-          <div class="flex items-center justify-center">
-            <button class="mx-4">
-              <img
-                src="/previous-icon.png"
-                alt="Back Icon"
-                class="w-1/2 h-auto md:w-6 md:h-6"
-              />
-            </button>
-            <button class="mx-4">
-              <img
-                src="/play-icon.svg"
-                alt="playBtn"
-                class="w-full h-auto md:w-10 md:h-10 transition-opacity duration-300"
-              />
-            </button>
-            <button class="mx-4">
-              <img
-                src="/next-icon.png"
-                alt="Forward Icon"
-                class="w-1/2 h-auto md:w-6 md:h-6"
-              />
-            </button>
-          </div>
-        </div>
-        <div class="flex-1 flex items-center justify-end mr-7">
-          <div id="fullscreen" class="mr-10 hover:cursor-pointer">
-            <img id="exit-full-screen" src="exit-full-screen.svg" alt="Exit Fullscreen" style="width: 30px; height: 30px;" class="transition duration-500 hover:scale-110 hover:brightness-200" />
-          </div>
-          <div id="volume-bar" class="volume-bar"></div>
-          <input
-            type="range"
-            id="volume"
-            name="volume"
-            min="0"
-            max="1"
-            step="0.01"
-            value="1"
-            class="w-24 h-1 sm:w-20 rounded-full"
-          />
-        </div>
+<div draggable="false">
+  <div
+    id="song-page"
+    class="fixed top-0 left-0 w-screen h-[calc(100vh-12rem)] z-50 bg-cover bg-center relative hidden animate-fadeIn"
+    style="
+      background-image: url('https://i1.sndcdn.com/artworks-61340eb1-4b14-463e-96b2-9ba3c81441ab-0-t500x500.jpg');
+    "
+  >
+    <div class="h-full relative w-1/3 p-4">
+      <div
+        class="select-none absolute inset-x-0 bottom-0 mb-10 ml-10 bg-darkbg rounded-2xl bg-opacity-50 p-4"
+      >
+        <h1 id="song-name" class="text-white text-4xl font-bold text-shadow">
+          Milo J: Bzrp Music Sessions, Vol. 57
+        </h1>
+        <p id="song-singers" class="text-white text-2xl text-shadow">
+          Bizarrap, Milo J
+        </p>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>
-
-<!-- <button class="bg-blue-500 text-white rounded-full p-4 my-4">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="white"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      class="h-4 w-4 lg:h-6 lg:w-6"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M6 2v20l18-10L6 2z"
-      />
-    </svg>
-  </button> -->

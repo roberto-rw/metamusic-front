@@ -22,7 +22,7 @@ export async function deployPlaylist(ctx) {
 
         const playlistComp = document.createElement('playlist-front-page-comp')
         playlistComp.setAttribute('name', playlist.name)
-        playlistComp.setAttribute('author', playlist.user.username)
+        playlistComp.setAttribute('author', playlist.user)
         playlistComp.setAttribute('description', playlist.description)
         playlistComp.setAttribute('image', playlist.image)
         playlistComp.setAttribute('songs', JSON.stringify(playlist.songs))

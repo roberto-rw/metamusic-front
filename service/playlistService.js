@@ -12,7 +12,7 @@ import { ENDPOINTS } from "../config/endpoints"
 //     return json
 // }
 
-export async function getPlaylistsByUser(){
+export async function getPlaylistsByUser() {
     const options = {
         method: "GET",
         credentials: 'include',
@@ -77,14 +77,14 @@ export async function deletePlaylist(idplaylist) {
     return json
 }
 
-export async function addSongToPlaylist(idplaylist, idsong) {
+export async function addSongToPlaylist(idplaylist, song) {
     const options = {
         method: "PUT",
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ idsong })
+        body: JSON.stringify({ song })
     }
     let response = await fetch(`${ENDPOINTS.PLAYLIST_URL}/update/addsong/${idplaylist}`, options)
     let json = await response.json()

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/music-player.css" />
 <footer
   id="music-player"
-  class="fixed bottom-0 h-28 w-screen bg-playerbg flex items-center justify-center select-none"
+  class="fixed bottom-0 h-28 w-screen bg-playerbg flex items-center justify-center select-none transition-all duration-75 animate-fadeIn"
 >
   <audio id="audio" src="/test.mp3"></audio>
   <div class="flex justify-between w-full h-full px-4">
@@ -14,7 +14,7 @@
         alt="Song Image"
         class="w-16 h-16 rounded-md hidden"
       />
-      <div id="title-artist-container" class="ml-4"> 
+      <div id="title-artist-container" class="ml-4">
         <h2 id="title" class="text-white text-lg"></h2>
         <p id="artist" class="text-gray-400 text-sm"></p>
       </div>
@@ -65,8 +65,18 @@
       </div>
     </div>
     <div class="lg:flex-1 flex items-center justify-end md:mr-7">
-      <img id="fullscreen" class="hover:cursor-pointer" src="../public/full-screen.svg" alt="">
-      <img id="exit-full-screen" class="hidden mr-5 hover:cursor-pointer" src="../public/exit-full-screen.svg" alt="">
+      <img
+        id="fullscreen"
+        class="hover:cursor-pointer"
+        src="/full-screen.svg"
+        alt=""
+      />
+      <img
+        id="exit-full-screen"
+        class="hidden mr-5 hover:cursor-pointer"
+        src="/exit-full-screen.svg"
+        alt=""
+      />
       <!-- <div id="fullscreen" class="hover:cursor-pointer">
       </div> -->
       <div id="volume-bar" class="volume-bar"></div>

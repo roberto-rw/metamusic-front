@@ -84,7 +84,19 @@ export class SongMenu extends HTMLElement {
     }
 
     async onPlaylistClick(id) {
-        const result = await addSongToPlaylist(id, this.#songDetails.cardId)
+        const song = {
+            idsong: this.#songDetails.cardId,
+            name: this.#songDetails.cardName,
+            album: this.#songDetails.cardAlbum,
+            duration: this.#songDetails.cardDuration,
+            image: this.#songDetails.cardImage,
+            singers: this.#songDetails.cardArtist
+
+        }
+
+        console.log(song)
+
+        const result = await addSongToPlaylist(id, song)
 
         if (result.success) {
             console.log(`Song with id ${this.#songDetails.cardId} was added to playlist with id ${id}.`)

@@ -1,5 +1,5 @@
+import { searchSongs } from "../../service/music-api.js"
 const template = document.createElement('template')
-import { getSongsByName } from "../../service/songService"
 
 const html = await (await fetch('../assets/searchbar.html')).text()
 template.innerHTML = html
@@ -23,8 +23,10 @@ export class Searchbar extends HTMLElement {
     async #printSearchResults() {
         const songsContainer = document.querySelector('#songs-container')
         songsContainer.innerHTML = ''
-        let songs = await getSongsByName(this.#searchbar.value)
-        console.log(songs)
+
+        let response = await searchSongs(this.#searchbar.value)
+        const songs = response.data
+
         songs.forEach(song => {
             const songCard = this.#createSongCard(song)
             songsContainer.appendChild(songCard)
@@ -34,11 +36,12 @@ export class Searchbar extends HTMLElement {
 
     #createSongCard(song) {
         const songCard = document.createElement('songcard-comp')
-        songCard.setAttribute('img', song.image)
-        songCard.setAttribute('name', song.name)
+        songCard.setAttribute('img', song.album.cover_xl)
+        songCard.setAttribute('name', song.title)
         songCard.setAttribute('duration', song.duration)
-        songCard.setAttribute('artist', song.singers)
-        songCard.setAttribute('idsong', song.idsong)
+        songCard.setAttribute('artist', song.artist.name)
+        songCard.setAttribute('album', song.album.title)
+        songCard.setAttribute('idsong', song.id)
 
         // Mostrar el menú al hacer clic derecho en songCard
         songCard.addEventListener('contextmenu', (event) => {
@@ -47,6 +50,8 @@ export class Searchbar extends HTMLElement {
             const songDetails = {
                 cardId: songCard.getAttribute('idsong'),
                 cardName: songCard.getAttribute('name'),
+                cardAlbum: songCard.getAttribute('album'),
+                cardDuration: songCard.getAttribute('duration'),
                 cardArtist: songCard.getAttribute('artist'),
                 cardImage: songCard.getAttribute('img')
             }
