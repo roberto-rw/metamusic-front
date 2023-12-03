@@ -96,7 +96,7 @@ export class PlaylistFrontPage extends HTMLElement {
     }
 
     #setAuthor() {
-        this.#authorElement.innerHTML = `by ${this.getAttribute('author')}`
+        this.#authorElement.innerHTML = `by ${sessionStorage.getItem('username')}`
     }
 
     #setImage() {

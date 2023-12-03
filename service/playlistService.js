@@ -1,13 +1,25 @@
 import { ENDPOINTS } from "../config/endpoints"
 
-export async function getPlaylistByUsername(username) {
+// export async function getPlaylistByUsername(username) {
+//     const options = {
+//         method: "GET",
+//         credentials: 'include',
+//         headers: {
+//         },
+//     }
+//     let response = await fetch((ENDPOINTS.PLAYLIST_URL + "search/byuser/" + username), options)
+//     let json = await response.json()
+//     return json
+// }
+
+export async function getPlaylistsByUser(){
     const options = {
         method: "GET",
         credentials: 'include',
         headers: {
         },
     }
-    let response = await fetch((ENDPOINTS.PLAYLIST_URL + "search/byuser/" + username), options)
+    let response = await fetch((ENDPOINTS.PLAYLIST_URL + "search/byuser/" + sessionStorage.getItem("id")), options)
     let json = await response.json()
     return json
 }
@@ -24,28 +36,28 @@ export async function getPlaylistByName(name) {
     return json[0]
 }
 
-export async function createPlaylist(name, description, image, username) {
+export async function createPlaylist(name, description, image, userId) {
     const options = {
         method: "POST",
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, description, image, user: { username } })
+        body: JSON.stringify({ name, description, image, user: userId })
     }
     let response = await fetch(ENDPOINTS.PLAYLIST_URL, options)
     let json = await response.json()
     return json
 }
 
-export async function updatePlaylist(idplaylist, name, description, image, username) {
+export async function updatePlaylist(idplaylist, name, description, image, userId) {
     const options = {
         method: "PUT",
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, description, image, user: { username } })
+        body: JSON.stringify({ name, description, image, user: userId })
     }
     let response = await fetch((ENDPOINTS.PLAYLIST_URL + idplaylist), options)
     let json = await response.json()

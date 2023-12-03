@@ -1,4 +1,4 @@
-import { getPlaylistByUsername, addSongToPlaylist } from "/service/playlistService.js"
+import { getPlaylistsByUser , addSongToPlaylist } from "/service/playlistService.js"
 
 const template = document.createElement('template')
 const html = await (await fetch('../assets/menus/songMenu.html')).text()
@@ -48,7 +48,7 @@ export class SongMenu extends HTMLElement {
     }
 
     async getPlaylists() {
-        return await getPlaylistByUsername(sessionStorage.getItem('username'))
+        return await getPlaylistsByUser()
     }
 
     showPlaylists(playlists) {

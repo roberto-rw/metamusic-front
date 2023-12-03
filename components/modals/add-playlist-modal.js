@@ -37,11 +37,11 @@ export class AddPlaylistModal extends HTMLElement {
     #handleCreate = async () => {
         const name = this.#nameInput.value
         const description = this.#descInput.value
-        const username = sessionStorage.getItem('username')
+        const userId = sessionStorage.getItem('id')
         const image = 'https://i.ibb.co/W6nStSF/ddf740b5-fd3a-4cfc-b13f-81e36225066f.jpg'
 
         try {
-            const data = await createPlaylist(name, description, image, username);
+            const data = await createPlaylist(name, description, image, userId);
 
             if (data.success) {
                 this.dispatchEvent(new CustomEvent('playlistCreated', {

@@ -1,11 +1,11 @@
 import page from 'page'
-import { getPlaylistByUsername, getPlaylistByName } from '../service/playlistService';
+import { getPlaylistsByUser, getPlaylistByName } from '../service/playlistService';
 import { isAuthenticated } from '../service/userService';
 
 export async function loadPlaylistsPage() {
     if (await isAuthenticated()) {
-        let username = sessionStorage.getItem('username');
-        const playlists = await getPlaylistByUsername(username)
+        // let username = sessionStorage.getItem('username');
+        const playlists = await getPlaylistsByUser()
         const playlistsComp = document.createElement('playlists-comp')
         playlistsComp.setAttribute('playlists', JSON.stringify(playlists))
         document.getElementById("content").innerHTML = ''

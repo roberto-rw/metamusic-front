@@ -67,19 +67,19 @@ export class EditPlaylistModal extends HTMLElement {
         const id = this.#idPlaylist
         const name = this.#nameInput.value
         const description = this.#descInput.value
-        const username = sessionStorage.getItem('username')
+        const userId = sessionStorage.getItem('id')
 
         try {
             let image
 
             if (this.#imagePreview.src !== this.#originalImage) {
-                image = await uploadImagePlaylist(this.#imagePreview.src, username)
+                image = await uploadImagePlaylist(this.#imagePreview.src, userId)
             } else {
                 console.log('no se ha cambiado la imagen')
                 image = this.#originalImage
             }
 
-            const data = await updatePlaylist(id, name, description, image, username)
+            const data = await updatePlaylist(id, name, description, image, userId)
 
             if (data.success) {
                 this.dispatchEvent(new CustomEvent('playlistCreated', {
