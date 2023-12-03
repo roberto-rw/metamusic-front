@@ -82,10 +82,7 @@ export class EditPlaylistModal extends HTMLElement {
             const data = await updatePlaylist(id, name, description, image, userId)
 
             if (data.success) {
-                this.dispatchEvent(new CustomEvent('playlistCreated', {
-                    detail: {
-                        playlist: data.playlist
-                    },
+                this.dispatchEvent(new CustomEvent('playlistUpdated', {
                     bubbles: true,
                     composed: true
                 }))

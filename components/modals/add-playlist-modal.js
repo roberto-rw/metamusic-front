@@ -45,9 +45,6 @@ export class AddPlaylistModal extends HTMLElement {
 
             if (data.success) {
                 this.dispatchEvent(new CustomEvent('playlistCreated', {
-                    detail: {
-                        playlist: data.playlist
-                    },
                     bubbles: true,
                     composed: true
                 }))

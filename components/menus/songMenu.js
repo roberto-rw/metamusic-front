@@ -1,4 +1,4 @@
-import { getPlaylistsByUser , addSongToPlaylist } from "/service/playlistService.js"
+import { getPlaylistsByUser, addSongToPlaylist } from "../../service/playlistService.js"
 
 const template = document.createElement('template')
 const html = await (await fetch('../assets/menus/songMenu.html')).text()
@@ -41,10 +41,17 @@ export class SongMenu extends HTMLElement {
             }, 500)
         })
 
-        document.addEventListener('playlistCreated', (event) => {
-            this.playlists.push(event.detail.playlist)
+        document.addEventListener('playlistCreated', async (event) => {
+            this.playlists = await this.getPlaylists()
         })
 
+        document.addEventListener('playlistUpdated', async (event) => {
+            this.playlists = await this.getPlaylists()
+        })
+
+        document.addEventListener('playlistDeleted', async (event) => {
+            this.playlists = await this.getPlaylists()
+        })
     }
 
     async getPlaylists() {

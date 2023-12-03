@@ -45,6 +45,10 @@ export class RemovePlaylistMenu extends HTMLElement {
         try {
             await deletePlaylist(this.playlistId)
             page.redirect('/playlist')
+            this.dispatchEvent(new CustomEvent('playlistDeleted', {
+                bubbles: true,
+                composed: true
+            }))
         } catch (error) {
             console.log(error)
         }
