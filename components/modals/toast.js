@@ -39,10 +39,12 @@ export class ToastComponent extends HTMLElement {
         }
 
         setTimeout(() => {
+            console.log('removing toast')
+            toast.classList.remove('animate-fadeInRight')
             toast.classList.add('animate-fadeOutRight')
             toast.addEventListener('animationend', () => {
                 this.#container.removeChild(toast)
-            }, { once: true });
+            }, { once: true })
         }, 2000)
 
         this.#container.appendChild(toast)

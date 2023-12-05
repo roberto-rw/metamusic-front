@@ -48,14 +48,33 @@ async function isAuth() {
     }
     let response = await fetch(ENDPOINTS.USER_URL + "is-authenticated", options)
     let json = await response.json()
+
+    if (json.isAuthenticated) {
+        if (sessionStorage.getItem('username') == null) {
+            console.log('setting session')
+            sessionStorage.setItem('username', json.username);
+            sessionStorage.setItem('email', json.email)
+            sessionStorage.setItem('id', json.id)
+            if (json.image != null) {
+                sessionStorage.setItem('image', json.image)
+            }
+            else {
+                sessionStorage.setItem('image', '/user-icon.png')
+            }
+
+            document.dispatchEvent(new CustomEvent('sessionDataSaved'));
+        }
+    }
+
+
     return json
 }
 
 export async function isAuthenticated() {
     try {
         return await isAuth().then((data) => {
-            console.log('auth: ' + data.isAuthenticated);
-            return data.isAuthenticated;
+            console.log('auth: ' + data.isAuthenticated)
+            return data.isAuthenticated
         })
     } catch (error) {
         console.error('Error checking authentication:', error);

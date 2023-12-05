@@ -21,12 +21,16 @@ export class Header extends HTMLElement {
     connectedCallback() {
         this.setText()
 
+        document.addEventListener('sessionDataSaved', async (event) => {
+            this.setText()
+        })
+
         document.addEventListener('userEdited', async (event) => {
             this.setText()
-        });
+        })
 
         this.#userIcon.addEventListener('click', () => {
-            this.#userModal.toggleUserMenu();
+            this.#userModal.toggleUserMenu()
         })
 
 
