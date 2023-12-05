@@ -17,10 +17,8 @@ export class SubscriptionContainer extends HTMLElement {
 
     async #printSubscriptions() {
         const subscriptionsContainer = this.shadowRoot.querySelector('#subscriptions-container')
-        console.log(subscriptionsContainer)
         subscriptionsContainer.innerHTML = ''
         let subscriptions = await getSubscriptions()
-        console.log(subscriptions)
         subscriptions.forEach(subscription => {
             const subscriptionCard = this.#createSubscriptionCard(subscription)
             subscriptionsContainer.appendChild(subscriptionCard)
@@ -35,6 +33,6 @@ export class SubscriptionContainer extends HTMLElement {
         subscriptionCard.setAttribute('duration', subscription.duration)
         return subscriptionCard
     }
-}   
+}
 
 customElements.define('subscription-container', SubscriptionContainer)

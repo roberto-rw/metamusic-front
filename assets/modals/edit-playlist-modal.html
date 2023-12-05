@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/tailwind.css" />
 <div
-  class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-25"
+  class="fixed inset-0 z-40 items-center justify-center hidden bg-black bg-opacity-25"
   id="add-playlist"
 >
   <div class="relative w-full max-w-xl max-h-full">
@@ -56,12 +56,14 @@
                 id="name"
                 type="text"
                 placeholder="Name"
+                autocomplete="off"
               />
               <textarea
                 class="resize-none flex-1 rounded-xl w-full py-2 px-4 text-white bg-opacity-50 leading-tight focus:outline-none focus:shadow-outline bg-darkfont md:text-base"
                 id="desc"
                 placeholder="Description"
                 rows="4"
+                autocomplete="off"
               ></textarea>
             </div>
           </div>

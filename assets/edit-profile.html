@@ -1,18 +1,59 @@
 <link rel="stylesheet" href="/tailwind.css" />
-<div class="flex flex-col md:flex-row items-center p-8 md:pl-96 space-y-4 md:space-y-0 md:space-x-8">
-    <img class="rounded-full w-36 h-36 md:w-64 md:h-64 md:ml-8" src="https://pbs.twimg.com/media/F-9FHs6XIAA5qAY?format=jpg&name=medium" alt="Foto de perfil">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:h-full md:w-full">
-        <div>
-            <h2 id="username" class="text-2xl md:text-5xl text-red-500">Username</h2>
-            <p id="email" class="md:text-lg">user@example.com</p>
-        </div>
-        <a href="/edit-profile">
-            <button id="edit-profile-button" class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded md:self-center md:mr-60">Save</button>
-        </a>
+<div
+  class="flex flex-col md:flex-row items-center p-8 md:pl-96 space-y-4 md:space-y-0 md:space-x-8"
+>
+  <div
+    draggable="false"
+    id="image-container"
+    class="select-none relative group flex-shrink-0 rounded-full hover:cursor-pointer"
+  >
+    <img
+      id="image"
+      alt=""
+      class="w-48 h-48 object-cover rounded-full ml-4 mt-4 lg:w-64 lg:h-64 lg:ml-0 lg:mt-0 transition duration-200 ease-in-out filter transform group-hover:z-10 group-hover:brightness-50"
+    />
+    <img
+      id="pencil-icon"
+      src="/edit.svg"
+      alt="Edit"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-44 h-44 object-cover rounded-lg opacity-0 group-hover:opacity-100"
+    />
+  </div>
+
+  <div
+    class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:h-full md:w-full"
+  >
+    <div>
+      <h2 id="username" class="text-2xl md:text-5xl text-red-500">Username</h2>
+      <p id="email" class="md:text-lg">user@example.com</p>
     </div>
+    <a>
+      <button
+        id="edit-profile-button"
+        class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded md:self-center md:mr-60"
+      >
+        Save
+      </button>
+    </a>
+  </div>
 </div>
 <div class="mt-4 p-8 md:pl-96">
-    <input class="rounded-lg bg-gradient-to-r from-slate-900 focus:outline-none to-dblue p-2 w-full md:w-1/2 mt-4" type="text" placeholder="Username" id="input-username">
-    <input class="rounded-lg bg-gradient-to-r from-slate-900 focus:outline-none to-dblue p-2 w-full md:w-1/2 mt-4" type="email" placeholder="Email" id="input-email">
-    <input class="rounded-lg bg-gradient-to-r from-slate-900 focus:outline-none to-dblue p-2 w-full md:w-1/2 mt-4" type="password" placeholder="Password" id="input-password">
+  <input
+    class="rounded-lg bg-gradient-to-r from-slate-900 focus:outline-none to-dblue p-2 w-full md:w-1/2 mt-4"
+    type="text"
+    placeholder="Username"
+    id="input-username"
+  />
+  <input
+    class="rounded-lg bg-gradient-to-r from-slate-900 focus:outline-none to-dblue p-2 w-full md:w-1/2 mt-4"
+    type="email"
+    placeholder="Email"
+    id="input-email"
+  />
+  <input
+    class="rounded-lg bg-gradient-to-r from-slate-900 focus:outline-none to-dblue p-2 w-full md:w-1/2 mt-4"
+    type="password"
+    placeholder="Password"
+    id="input-password"
+  />
 </div>

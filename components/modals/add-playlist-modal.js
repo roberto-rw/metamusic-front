@@ -42,25 +42,29 @@ export class AddPlaylistModal extends HTMLElement {
 
         try {
             const data = await createPlaylist(name, description, image, userId);
-
+            const toast = document.querySelector('toast-component')
             if (data.success) {
                 this.dispatchEvent(new CustomEvent('playlistCreated', {
                     bubbles: true,
                     composed: true
                 }))
 
-
                 this.onClose()
                 page.redirect('/playlist')
+
+                toast.showToast('Se creo una nueva playlist', 'success')
             } else {
-                alert(data.message)
+                toast.showToast(data.message, 'error')
             }
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     }
 
     onClose = () => {
+        this.#nameInput.value = ''
+        this.#descInput.value = ''
+
         this.#addPlaylist.style.display = 'none'
         this.setAttribute('open', 'false')
 

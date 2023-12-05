@@ -12,11 +12,22 @@ export async function login(username, password) {
     }
     let response = await fetch(ENDPOINTS.USER_URL + "login", options)
     let json = await response.json()
+    console.log(json)
+
     if (json.success) {
         sessionStorage.setItem('username', json.username);
         sessionStorage.setItem('email', json.email)
         sessionStorage.setItem('id', json.id)
+        if (json.image != null) {
+            sessionStorage.setItem('image', json.image)
+        }
+        else {
+            sessionStorage.setItem('image', '/user-icon.png')
+        }
+
     }
+
+
     return json
 }
 
@@ -37,9 +48,6 @@ async function isAuth() {
     }
     let response = await fetch(ENDPOINTS.USER_URL + "is-authenticated", options)
     let json = await response.json()
-    if (json.isAuthenticated && !sessionStorage.getItem('username')) {
-        sessionStorage.setItem('username', json.username);
-    }
     return json
 }
 
@@ -68,7 +76,7 @@ export async function register(username, password, email) {
     return json
 }
 
-export async function subscribe(subscriptionData){
+export async function subscribe(subscriptionData) {
     const options = {
         method: "POST",
         credentials: 'include',
@@ -82,7 +90,7 @@ export async function subscribe(subscriptionData){
     return json
 }
 
-export async function editUser(userData){
+export async function editUser(userData) {
     console.log(userData);
     const options = {
         method: "PUT",

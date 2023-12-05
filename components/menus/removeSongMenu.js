@@ -4,7 +4,7 @@ const template = document.createElement('template')
 const html = await (await fetch('../assets/menus/removeSongMenu.html')).text()
 template.innerHTML = html
 
-export class RemoveSongMenu extends HTMLElement{
+export class RemoveSongMenu extends HTMLElement {
     constructor() {
         super()
         const shadow = this.attachShadow({ mode: 'open' })
@@ -44,11 +44,20 @@ export class RemoveSongMenu extends HTMLElement{
         removeSongMenu.classList.add('hidden')
     }
 
-    async removeSong(){
-        const playlistUpdated = await removeSongFromPlaylist(this.playlistId, this.songId)
-        const songs = playlistUpdated.songs
-        // Emitir un evento personalizado después de que la canción se ha eliminado
-        this.dispatchEvent(new CustomEvent('songRemoved', { bubbles: true, composed: true, detail: songs }));
+    async removeSong() {
+        const toast = document.querySelector('toast-component')
+        try {
+            const playlistUpdated = await removeSongFromPlaylist(this.playlistId, this.songId)
+            const songs = playlistUpdated.songs
+
+            toast.showToast('Se elimino la cancion', '!')
+            this.dispatchEvent(new CustomEvent('songRemoved', { bubbles: true, composed: true, detail: songs }))
+        } catch (error) {
+            toast.showToast('Ocurrio un error al eliminar la cancion', 'error')
+            console.log(error)
+        }
+
+
     }
 }
 

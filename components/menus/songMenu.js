@@ -98,9 +98,12 @@ export class SongMenu extends HTMLElement {
 
         const result = await addSongToPlaylist(id, song)
 
+        const toast = document.querySelector('toast-component')
         if (result.success) {
+            toast.showToast('Se agrego la cancion a la playlist', 'success')
             console.log(`Song with id ${this.#songDetails.cardId} was added to playlist with id ${id}.`)
         } else {
+            toast.showToast(result.message, '!')
             console.log(`Song with id ${this.#songDetails.cardId} was not added to playlist with id ${id}.`)
         }
     }

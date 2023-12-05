@@ -4,6 +4,14 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
+        fadeInRight: {
+          '0%': { opacity: '0', transform: 'translateX(50px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        fadeOutRight: {
+          '0%': { opacity: '1', transform: 'translateX(0)' },
+          '100%': { opacity: '0', transform: 'translateX(50px)' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
@@ -16,6 +24,8 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn 0.25s ease-in-out',
         fadeOut: 'fadeOut 0.3s ease-in-out',
+        fadeInRight: 'fadeInRight 0.5s forwards',
+        fadeOutRight: 'fadeOutRight 0.5s forwards',
       },
       colors: {
         darkfont: '#1E1E1E',

@@ -16,17 +16,25 @@ export class SubscriptionCard extends HTMLElement {
         this.shadowRoot.querySelector('#cost').textContent = `$ ${this.getAttribute('cost')}`;
         this.shadowRoot.querySelector('#duration').textContent = `${this.getAttribute('duration')} days`;
 
-        this.shadowRoot.querySelector('#subscribe-button').addEventListener('click', ()=> this.#toSubscribe())   
+        this.shadowRoot.querySelector('#subscribe-button').addEventListener('click', () => this.#toSubscribe())
     }
 
-    async #toSubscribe(){
+    async #toSubscribe() {
         const subscriptionData = {
             idsubscription: this.getAttribute('id')
         }
-        
+
         let response = await subscribe(subscriptionData)
+
+        const toast = document.querySelector('toast-component')
         console.log(response)
+        if (response.success) {
+            toast.showToast(response.message, 'success')
+        } else {
+            toast.showToast(response.message, 'error')
+        }
+
     }
-}   
+}
 
 customElements.define('subscription-card', SubscriptionCard)

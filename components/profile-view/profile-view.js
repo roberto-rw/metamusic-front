@@ -4,7 +4,7 @@ const template = document.createElement('template')
 const html = await (await fetch('../assets/profile-view.html')).text()
 template.innerHTML = html
 
-export class ProfileView extends HTMLElement{
+export class ProfileView extends HTMLElement {
     constructor() {
         super()
         const shadow = this.attachShadow({ mode: 'open' })
@@ -12,19 +12,21 @@ export class ProfileView extends HTMLElement{
     }
 
     connectedCallback() {
-        const username = this.shadowRoot.querySelector('#username');
-        const email = this.shadowRoot.querySelector('#email');
-        username.textContent = sessionStorage.getItem('username');
-        email.textContent = sessionStorage.getItem('email');
-        this.#loadSongs();
+        const image = this.shadowRoot.querySelector('#profile-image')
+        const username = this.shadowRoot.querySelector('#username')
+        const email = this.shadowRoot.querySelector('#email')
+        image.setAttribute('src', sessionStorage.getItem('image'))
+        username.textContent = sessionStorage.getItem('username')
+        email.textContent = sessionStorage.getItem('email')
+        this.#loadSongs()
     }
 
     async #loadSongs() {
-        const likedSongs = this.shadowRoot.querySelector('#liked-songs');
+        const likedSongs = this.shadowRoot.querySelector('#liked-songs')
         const songs = await getSongs()
         songs.forEach(song => {
-            const songCard = this.#createSongCard(song);
-            likedSongs.appendChild(songCard);
+            const songCard = this.#createSongCard(song)
+            likedSongs.appendChild(songCard)
         });
     }
 

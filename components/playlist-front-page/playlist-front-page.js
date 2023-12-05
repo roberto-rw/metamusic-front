@@ -77,11 +77,10 @@ export class PlaylistFrontPage extends HTMLElement {
     #handlePlaylistHistory() {
         let playlistHistorial = JSON.parse(localStorage.getItem('playlist-historial')) || []
         const playlist = {
-            img: this.getAttribute('image'),
-            name: this.getAttribute('name')
+            id: this.getAttribute('id')
         }
 
-        const index = playlistHistorial.findIndex(pl => pl.name === playlist.name);
+        const index = playlistHistorial.findIndex(pl => pl.id === playlist.id);
 
         if (index !== -1) {
             playlistHistorial.splice(index, 1);

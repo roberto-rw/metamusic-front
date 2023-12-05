@@ -42,14 +42,18 @@ export class RemovePlaylistMenu extends HTMLElement {
     }
 
     async removeSong() {
+        const toast = document.querySelector('toast-component')
         try {
             await deletePlaylist(this.playlistId)
+            toast.showToast('Se elimino la playlist', '!')
+
             page.redirect('/playlist')
             this.dispatchEvent(new CustomEvent('playlistDeleted', {
                 bubbles: true,
                 composed: true
             }))
         } catch (error) {
+            toast.showToast('Ocurrio un error al eliminar la playlist', 'error')
             console.log(error)
         }
     }

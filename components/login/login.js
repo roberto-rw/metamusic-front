@@ -1,4 +1,5 @@
 import { login } from "../../service/userService.js"
+import page from 'page'
 
 const template = document.createElement('template')
 
@@ -34,9 +35,10 @@ export class Login extends HTMLElement {
             const data = await login(username, password)
 
             if (data.success) {
-                window.location.href = "/";
+                window.location.href = '/'
             } else {
-                alert('Las credenciales son incorrectas');
+                const toast = document.querySelector('toast-component')
+                toast.showToast(data.message, 'error')
             }
         } catch (error) {
             console.error(error);

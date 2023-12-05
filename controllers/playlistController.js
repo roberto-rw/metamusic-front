@@ -18,6 +18,9 @@ export async function loadPlaylistsPage() {
 export async function deployPlaylist(ctx) {
     if (await isAuthenticated()) {
         const name = ctx.params.name
+
+        // hacer que solo encuentra las del mismo user
+
         const playlist = await getPlaylistByName(name)
 
         const playlistComp = document.createElement('playlist-front-page-comp')

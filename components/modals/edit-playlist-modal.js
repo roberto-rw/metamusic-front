@@ -81,17 +81,18 @@ export class EditPlaylistModal extends HTMLElement {
 
             const data = await updatePlaylist(id, name, description, image, userId)
 
+            const toast = document.querySelector('toast-component')
             if (data.success) {
                 this.dispatchEvent(new CustomEvent('playlistUpdated', {
                     bubbles: true,
                     composed: true
                 }))
 
-
+                toast.showToast('Se actualizo la playlist', '!')
                 this.onClose()
                 page.redirect('/playlist/' + data.playlist.name)
             } else {
-                alert(data.message)
+                toast.showToast(data.message, 'error')
             }
         } catch (error) {
             console.error(error);

@@ -12,6 +12,18 @@ import { ENDPOINTS } from "../config/endpoints"
 //     return json
 // }
 
+export async function getPlaylistById(id) {
+    const options = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+        },
+    }
+    let response = await fetch((ENDPOINTS.PLAYLIST_URL + id), options)
+    let json = await response.json()
+    return json
+}
+
 export async function getPlaylistsByUser() {
     const options = {
         method: "GET",

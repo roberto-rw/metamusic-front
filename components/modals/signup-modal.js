@@ -43,8 +43,10 @@ export class SignupModal extends HTMLElement {
         const confirmPassword = this.#confirmPasswordInput.value
         const email = this.#emailInput.value
 
+        const toast = document.querySelector('toast-component')
         if (password !== confirmPassword) {
-            alert('Las contraseñas no coinciden')
+
+            toast.showToast('Las contraseñas no coinciden', 'error')
             return
         }
 
@@ -52,9 +54,10 @@ export class SignupModal extends HTMLElement {
             const data = await register(username, password, email);
 
             if (data.success) {
+                toast.showToast('Registro con exito', 'success')
                 this.onClose()
             } else {
-                alert(data.message)
+                toast.showToast(data.message, 'error')
             }
         } catch (error) {
             console.error(error);

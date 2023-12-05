@@ -28,7 +28,11 @@ export async function homeController() {
 export async function logoutController() {
     const response = await logout()
     if (response.success) {
+        sessionStorage.removeItem('id')
         sessionStorage.removeItem('username')
+        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('image')
+
         page.redirect('/')
     }
     else {
@@ -36,7 +40,7 @@ export async function logoutController() {
     }
 }
 
-export async function profileController(){
+export async function profileController() {
     if (await isAuthenticated()) {
         const html = await fetch("/pages/profile.html").then((data) => data.text())
         document.getElementById("content").innerHTML = html
@@ -45,7 +49,7 @@ export async function profileController(){
     }
 }
 
-export async function editProfileController(){
+export async function editProfileController() {
     if (await isAuthenticated()) {
         const html = await fetch("/pages/edit.html").then((data) => data.text())
         document.getElementById("content").innerHTML = html

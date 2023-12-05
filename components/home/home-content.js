@@ -1,4 +1,5 @@
 import page from "page"
+import { getPlaylistById } from "../../service/playlistService"
 
 const template = document.createElement('template')
 
@@ -30,8 +31,7 @@ export class HomeContent extends HTMLElement {
         let playlists = []
 
         if (this.getAttribute('title') === 'Pick up where you left off') {
-            let historial = JSON.parse(localStorage.getItem('playlist-historial')) || []
-            playlists = historial.slice(0, 3)
+            playlists = await this.getPlaylistsHistory()
         }
         else {
             playlists = [
@@ -49,7 +49,6 @@ export class HomeContent extends HTMLElement {
                 }
             ]
         }
-
         playlists.forEach(playlist => {
             const playlistCard = document.createElement('playlistcard-comp')
             playlistCard.setAttribute('img', playlist.img)
@@ -58,10 +57,23 @@ export class HomeContent extends HTMLElement {
             playlistCard.addEventListener('click', (e) => {
                 page.redirect(`/playlist/${playlist.name}`)
             })
-
             this.playlistContainer.appendChild(playlistCard)
         })
 
+    }
+
+    async getPlaylistsHistory() {
+        let historial = []
+        const playlists = (JSON.parse(localStorage.getItem('playlist-historial'))).slice(0, 3)
+
+        await Promise.all(playlists.map(async playlist => {
+            const data = await getPlaylistById(playlist.id)
+            if (data.success) {
+                historial.push({ img: data.playlist.image, name: data.playlist.name })
+            }
+        }))
+
+        return historial
     }
 }
 
