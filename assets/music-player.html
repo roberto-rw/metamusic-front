@@ -6,20 +6,21 @@
 >
   <audio id="audio" src="/test.mp3"></audio>
   <div class="flex justify-between w-full h-full px-4">
+    <div id="space-cont" class="mr-10 flex-1 flex items-center hidden"></div>
     <!-- Contenedor de la imagen, canción, título y el artista -->
-    <div
-      id="song-data-container"
-      class="mr-10 lg:flex-1 md:flex items-center hidden"
-    >
+    <div id="song-data-container" class="mr-10 lg:flex-1 flex items-center">
       <img
         id="image"
         src=""
         alt="Song Image"
-        class="w-16 h-16 rounded-md hidden"
+        class="h-12 md:w-16 md:h-16 rounded-md hidden"
       />
-      <div id="title-artist-container" class="ml-4">
-        <h2 id="title" class="text-white text-lg"></h2>
-        <p id="artist" class="text-gray-400 text-sm"></p>
+      <div
+        id="title-artist-container"
+        class="ml-4 md:block hidden max-w-[10rem] xl:max-w-sm"
+      >
+        <h2 id="title" class="text-white text-base lg:text-lg truncate"></h2>
+        <p id="artist" class="text-gray-400 text-sm truncate"></p>
       </div>
     </div>
     <!-- ================================================================= -->
@@ -70,13 +71,13 @@
     <div class="lg:flex-1 flex items-center justify-end md:mr-7">
       <img
         id="fullscreen"
-        class="hover:cursor-pointer"
+        class="hover:cursor-pointer h-12"
         src="/full-screen.svg"
         alt=""
       />
       <img
         id="exit-full-screen"
-        class="hidden mr-5 hover:cursor-pointer"
+        class="hidden mr-5 hover:cursor-pointer h-7"
         src="/exit-full-screen.svg"
         alt=""
       />
@@ -91,7 +92,7 @@
         max="1"
         step="0.01"
         value="1"
-        class="w-24 h-1 sm:w-20 rounded-full"
+        class="w-16 md:w-24 h-1 sm:w-20 rounded-full"
       />
     </div>
   </div>

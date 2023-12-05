@@ -27,6 +27,7 @@ export class Player extends HTMLElement {
     #titleArtistContainer
     #songImage
     #fullScreenModeActvated
+    #spaceContainer
 
     constructor() {
         super()
@@ -53,6 +54,7 @@ export class Player extends HTMLElement {
         this.#titleArtistContainer = this.shadowRoot.getElementById('title-artist-container')
         this.#songImage = this.shadowRoot.getElementById('image')
         this.#fullScreenModeActvated = false
+        this.#spaceContainer = this.shadowRoot.getElementById('space-cont')
     }
 
     async connectedCallback() {
@@ -140,8 +142,8 @@ export class Player extends HTMLElement {
 
         this.#fullscreenButton.classList.add('hidden')
         this.#exitFullScreenButton.classList.remove('hidden')
-        this.#titleArtistContainer.classList.add('hidden')
-        this.#songImage.classList.add('hidden')
+        this.#spaceContainer.classList.remove('hidden')
+        this.#songDataContainer.classList.add('hidden')
         this.#fullScreenModeActvated = true
     }
 
@@ -149,6 +151,7 @@ export class Player extends HTMLElement {
         this.#musicPlayer.classList.remove('h-48')
         this.#musicPlayer.classList.add('h-28')
 
+        this.#spaceContainer.classList.add('hidden')
         this.#fullscreenButton.classList.remove('hidden')
         this.#exitFullScreenButton.classList.add('hidden')
         this.#songDataContainer.classList.remove('hidden')
@@ -158,8 +161,6 @@ export class Player extends HTMLElement {
             composed: true
         }))
 
-        this.#titleArtistContainer.classList.remove('hidden')
-        this.#songImage.classList.remove('hidden')
         this.#fullScreenModeActvated = false
     }
 
