@@ -64,7 +64,11 @@ export class HomeContent extends HTMLElement {
 
     async getPlaylistsHistory() {
         let historial = []
-        const playlists = (JSON.parse(localStorage.getItem('playlist-historial'))).slice(0, 3)
+        const pHistorial = JSON.parse(localStorage.getItem('playlist-historial'))
+        let playlists = []
+        if (pHistorial) {
+            playlists = pHistorial.slice(0, 3)
+        }
 
         await Promise.all(playlists.map(async playlist => {
             const data = await getPlaylistById(playlist.id)
