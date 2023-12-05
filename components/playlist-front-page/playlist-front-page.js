@@ -63,6 +63,11 @@ export class PlaylistFrontPage extends HTMLElement {
     }
 
     #handlePlayPlaylist() {
+        if (this.#songs.length === 0) {
+            const toast = document.querySelector('toast-component')
+            toast.showToast('Esta playlist no tiene canciones', '!')
+            return
+        }
         this.#handlePlaylistHistory()
 
         this.dispatchEvent(new CustomEvent('addSongsQueue', {
