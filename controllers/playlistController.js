@@ -1,5 +1,5 @@
 import page from 'page'
-import { getPlaylistsByUser, getPlaylistByName } from '../service/playlistService';
+import { getPlaylistsByUser, getPlaylistByName, getPlaylistById } from '../service/playlistService';
 import { isAuthenticated } from '../service/userService';
 
 export async function loadPlaylistsPage() {
@@ -16,12 +16,52 @@ export async function loadPlaylistsPage() {
 }
 
 export async function deployPlaylist(ctx) {
+    const toast = document.querySelector('toast-component')
     if (await isAuthenticated()) {
         const name = ctx.params.name
-
-        // hacer que solo encuentra las del mismo user
-
         const playlist = await getPlaylistByName(name)
+
+        if (!playlist) {
+            toast.showToast(`No tienes ninguna playlist llamada ${name}`, 'error')
+            page.redirect('/playlist')
+            return
+        }
+
+        const playlistComp = document.createElement('playlist-front-page-comp')
+        playlistComp.setAttribute('name', playlist.name)
+        playlistComp.setAttribute('author', playlist.user)
+        playlistComp.setAttribute('description', playlist.description)
+        playlistComp.setAttribute('image', playlist.image)
+        playlistComp.setAttribute('songs', JSON.stringify(playlist.songs))
+        playlistComp.setAttribute('id', playlist._id)
+        playlistComp.setAttribute('editable', '')
+
+        document.getElementById("content").innerHTML = ''
+        document.getElementById("content").appendChild(playlistComp)
+    } else {
+        page.redirect('/')
+    }
+
+}
+
+export async function loadRecommended(ctx) {
+    const toast = document.querySelector('toast-component')
+    if (await isAuthenticated()) {
+        const name = ctx.params.name
+        const response = await getPlaylistById(name)
+
+        if (!response.success) {
+            toast.showToast(response.message, 'error')
+            page.redirect('/')
+            return
+        }
+
+        const playlist = response.playlist
+
+        if (!playlist) {
+            page.redirect('404')
+            return
+        }
 
         const playlistComp = document.createElement('playlist-front-page-comp')
         playlistComp.setAttribute('name', playlist.name)
@@ -31,12 +71,12 @@ export async function deployPlaylist(ctx) {
         playlistComp.setAttribute('songs', JSON.stringify(playlist.songs))
         playlistComp.setAttribute('id', playlist._id)
 
+
         document.getElementById("content").innerHTML = ''
         document.getElementById("content").appendChild(playlistComp)
     } else {
         page.redirect('/')
     }
-
 }
 
 

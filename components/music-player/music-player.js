@@ -11,6 +11,7 @@ export class Player extends HTMLElement {
     #queue
     #playedSongs
     #repeat
+    #random
     #repeatImg
     #audio
     #playButton
@@ -28,6 +29,9 @@ export class Player extends HTMLElement {
     #songImage
     #fullScreenModeActvated
     #spaceContainer
+    #randomButton
+
+    #originalQueue = []
 
     constructor() {
         super()
@@ -36,6 +40,7 @@ export class Player extends HTMLElement {
         this.#queue = []
         this.#playedSongs = []
         this.#repeat = false
+        this.#random = false
         const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(template.content.cloneNode(true))
         this.#audio = this.shadowRoot.getElementById('audio')
@@ -55,6 +60,7 @@ export class Player extends HTMLElement {
         this.#songImage = this.shadowRoot.getElementById('image')
         this.#fullScreenModeActvated = false
         this.#spaceContainer = this.shadowRoot.getElementById('space-cont')
+        this.#randomButton = this.shadowRoot.getElementById('random-songs')
     }
 
     async connectedCallback() {
@@ -67,6 +73,7 @@ export class Player extends HTMLElement {
         this.#nextButton.addEventListener('click', () => this.#playNextSong())
         this.#prevButton.addEventListener('click', () => this.#playPrevSong())
         this.#repeatButton.addEventListener('click', () => this.#handleRepeat())
+        this.#randomButton.addEventListener('click', () => this.#handleRandom())
 
 
         document.addEventListener('cardSelected', async (event) => {
@@ -112,7 +119,7 @@ export class Player extends HTMLElement {
             this.#playNextSong()
         })
 
-        this.#songDataContainer.addEventListener('click', () => {
+        this.#songImage.addEventListener('click', () => {
             this.#fullScreenMode()
         })
 
@@ -164,6 +171,19 @@ export class Player extends HTMLElement {
         this.#fullScreenModeActvated = false
     }
 
+    #handleRandom() {
+        if (this.#random) {
+            console.log('unshuffle')
+            this.#random = false
+            this.#randomButton.src = '/random.svg'
+        } else {
+            console.log('shuffle')
+            this.#random = true
+            this.#randomButton.src = '/random-active.svg'
+            this.#shuffleQueue()
+        }
+    }
+
     #handleRepeat() {
         if (this.#repeat) {
             this.#repeat = false
@@ -174,7 +194,20 @@ export class Player extends HTMLElement {
         }
     }
 
+
+
     async #playNextSong() {
+        if (this.#queue.length === 0 && this.#repeat) {
+            const currentSongIndex = this.#playedSongs.indexOf(this.#actualSong);
+            if (currentSongIndex > -1) {
+                this.#playedSongs.splice(currentSongIndex, 1);
+            }
+            this.#queue = [...this.#playedSongs, this.#actualSong]
+
+            this.#playedSongs = []
+            this.#actualSong = null
+        }
+
         if (this.#queue.length > 0) {
             const nextSong = this.#queue.shift()
             if (this.#actualSong) {
@@ -189,15 +222,33 @@ export class Player extends HTMLElement {
             this.#playButton.src = '/pause-icon.svg'
             this.#printSong(nextSong)
         }
-        else {
-            if (this.#repeat) {
-                this.#playedSongs.push(this.#actualSong)
-                this.#actualSong = null
-                this.#queue = this.#playedSongs
-                this.#playedSongs = []
-                this.#playNextSong()
-            }
+    }
+
+    async #playPrevSong() {
+        console.log(this.#playedSongs)
+        if (this.#playedSongs.length > 0) {
+            this.#queue.unshift(this.#actualSong)
+            const prevSong = this.#playedSongs.pop()
+            await this.#getSong(prevSong.idsong)
+            this.#audio.src = this.#song.preview
+            this.#audio.play()
+            this.#playButton.src = '/pause-icon.svg'
+            this.#printSong(prevSong)
+            this.#actualSong = prevSong
+            this.#dispatchChangeSongEvent()
         }
+    }
+
+    #shuffleQueue() {
+        console.log(this.#queue)
+
+        for (let i = this.#queue.length - 1; i >= 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.#queue[i], this.#queue[j]] = [this.#queue[j], this.#queue[i]];
+        }
+
+        console.log(this.#queue)
+
     }
 
     #dispatchChangeSongEvent() {
@@ -210,24 +261,6 @@ export class Player extends HTMLElement {
             bubbles: true,
             composed: true
         }))
-    }
-
-    async #playPrevSong() {
-        if (this.#playedSongs.length > 0) {
-            const prevSong = this.#playedSongs.pop()
-            await this.#getSong(prevSong.idsong)
-            this.#audio.src = this.#song.preview
-            this.#audio.play()
-            this.#playButton.src = '/pause-icon.svg'
-            this.#printSong(prevSong)
-
-            if (this.#actualSong) {
-                this.#queue.unshift(this.#actualSong)
-            }
-
-            this.#actualSong = prevSong
-            this.#dispatchChangeSongEvent()
-        }
     }
 
     #printSong(details) {

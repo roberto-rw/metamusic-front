@@ -35,14 +35,22 @@ export class PlaylistFrontPage extends HTMLElement {
         this.#setImage()
         this.#setId()
 
-        this.#playPlaylistButton.addEventListener('click', () => this.#handlePlayPlaylist())
-        this.#imageContainer.addEventListener('click', () => this.#handleEditPlaylist())
+        if (this.hasAttribute('editable')) {
+            this.#imageContainer.addEventListener('click', () => this.#handleEditPlaylist())
+        }
+        else {
+            this.#onlyView()
+        }
 
-        // Evento lanzado cuando se elimina una canción de la playlist
+        this.#playPlaylistButton.addEventListener('click', () => this.#handlePlayPlaylist())
         this.addEventListener('songRemoved', (event) => {
             const newSongs = event.detail
             this.#updateSongs(newSongs)
         })
+    }
+
+    #onlyView() {
+        this.#imageContainer.classList.remove('group', 'hover:cursor-pointer')
     }
 
     #updateSongs(newSongs) {
@@ -101,6 +109,11 @@ export class PlaylistFrontPage extends HTMLElement {
 
     #setAuthor() {
         this.#authorElement.innerHTML = `by ${sessionStorage.getItem('username')}`
+
+        if (!this.hasAttribute('editable')) {
+            this.#authorElement.classList.add('hidden')
+        }
+
     }
 
     #setImage() {
@@ -114,6 +127,11 @@ export class PlaylistFrontPage extends HTMLElement {
 
     #createSongCards() {
         this.#songsContainer.innerHTML = ''
+
+        if (!this.getAttribute('songs')) {
+            return
+        }
+
         const songs = JSON.parse(this.getAttribute('songs'))
         this.#songs = songs
         songs.forEach(song => {
@@ -130,11 +148,15 @@ export class PlaylistFrontPage extends HTMLElement {
         songCard.setAttribute('artist', song.singers)
         songCard.setAttribute('idsong', song.idsong)
 
-        songCard.addEventListener('contextmenu', (event) => {
-            event.preventDefault();
+        if (this.hasAttribute('editable')) {
+            songCard.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
 
-            this.#removeSongMenu.show(event, songCard.getAttribute('idsong'), this.#playlistId);
-        });
+                this.#removeSongMenu.show(event, songCard.getAttribute('idsong'), this.#playlistId);
+            });
+        }
+
+
 
         return songCard
     }

@@ -44,9 +44,23 @@ export class SignupModal extends HTMLElement {
         const email = this.#emailInput.value
 
         const toast = document.querySelector('toast-component')
+
+        if (username.length === 0 || password.length === 0 || confirmPassword.length === 0 || email.length === 0) {
+            toast.showToast('Por favor, complete todos los campos', 'error')
+            return
+        }
+
+
         if (password !== confirmPassword) {
 
             toast.showToast('Las contraseñas no coinciden', 'error')
+            return
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email.match(emailRegex)) {
+            toast.showToast('El formato del correo electrónico no es válido', 'error');
             return
         }
 

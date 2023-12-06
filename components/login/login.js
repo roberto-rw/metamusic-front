@@ -11,6 +11,8 @@ export class Login extends HTMLElement {
     #passwordInput
     #loginButton
     #registerLink
+    #googleButton
+    #githubButton
 
     constructor() {
         super()
@@ -20,11 +22,20 @@ export class Login extends HTMLElement {
         this.#passwordInput = this.shadowRoot.querySelector('#password')
         this.#loginButton = this.shadowRoot.querySelector('#login')
         this.#registerLink = this.shadowRoot.querySelector('#register-link')
+        this.#googleButton = this.shadowRoot.querySelector('#google')
+        this.#githubButton = this.shadowRoot.querySelector('#github')
     }
 
     connectedCallback() {
-        this.#loginButton.addEventListener('click', () => this.#handleLogin());
-        this.#registerLink.addEventListener('click', () => this.#handleRegister());
+        this.#loginButton.addEventListener('click', () => this.#handleLogin())
+        this.#registerLink.addEventListener('click', () => this.#handleRegister())
+        this.#googleButton.addEventListener('click', () => this.#handleProximamente())
+        this.#githubButton.addEventListener('click', () => this.#handleProximamente())
+    }
+
+    #handleProximamente() {
+        const toast = document.querySelector('toast-component')
+        toast.showToast('Proximamente', '!')
     }
 
     async #handleLogin() {

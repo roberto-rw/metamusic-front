@@ -1,5 +1,5 @@
 import page from "page"
-import { getPlaylistById } from "../../service/playlistService"
+import { getPlaylistById, getPlaylistsAdmin } from "../../service/playlistService"
 
 const template = document.createElement('template')
 
@@ -33,30 +33,55 @@ export class HomeContent extends HTMLElement {
         if (this.getAttribute('title') === 'Pick up where you left off') {
             playlists = await this.getPlaylistsHistory()
         }
-        else {
-            playlists = [
+        else if (this.getAttribute('title') === 'For you') {
+            const response = await getPlaylistsAdmin()
+            console.log(response)
+
+            if (response.success) {
+                const adminPlaylist = response.playlists
+
+                adminPlaylist.forEach(playlist => {
+                    playlists.push({ img: playlist.image, name: playlist.name, id: playlist._id })
+                })
+            }
+
+            /* playlists = [
                 {
                     img: "https://editorial.aristeguinoticias.com/wp-content/uploads/2023/06/JK-SEVEN-29062023.jpg",
-                    name: "Top hits"
+                    name: "Top hits",
+                    id: "656fb1384139dc2b52fe081f"
                 },
                 {
                     img: "https://blob.diariodelyaqui.mx/images/2021/06/27/yecorazo-jpeg-1624831497912-focus-min0.01-min0.25-732-549.jpg",
-                    name: "Travel"
+                    name: "Travel",
+                    id: "656fb1384139dc2b52fe081f"
                 },
                 {
                     img: "https://i.blogs.es/71281f/shingeki/1366_2000.jpeg",
-                    name: "SNK"
+                    name: "SNK",
+                    id: "656fb1384139dc2b52fe081f"
                 }
-            ]
+            ] */
         }
         playlists.forEach(playlist => {
             const playlistCard = document.createElement('playlistcard-comp')
             playlistCard.setAttribute('img', playlist.img)
             playlistCard.setAttribute('name', playlist.name)
+            playlistCard.setAttribute('id', playlist.id)
 
-            playlistCard.addEventListener('click', (e) => {
-                page.redirect(`/playlist/${playlist.name}`)
-            })
+            if (this.getAttribute('title') === 'Pick up where you left off') {
+                playlistCard.addEventListener('click', (e) => {
+                    page.redirect(`/playlist/${playlist.name}`)
+                })
+            }
+            else if (this.getAttribute('title') === 'For you') {
+                console.log('for you')
+
+                playlistCard.addEventListener('click', (e) => {
+                    page.redirect(`/recommended/${playlist.id}`)
+                })
+            }
+
             this.playlistContainer.appendChild(playlistCard)
         })
 

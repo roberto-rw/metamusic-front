@@ -3,6 +3,9 @@ module.exports = {
   content: ['./*.{html,js}', './assets/**/*.{html,js}', './pages/*.{html,js}'],
   theme: {
     extend: {
+      cursor: {
+        grabbing: 'grabbing',
+      },
       keyframes: {
         fadeInRight: {
           '0%': { opacity: '0', transform: 'translateX(50px)' },
@@ -37,6 +40,11 @@ module.exports = {
         playerbg: '#0A0A0A',
       }
     }
+  },
+  variants: {
+    extend: {
+      cursor: ['active'],
+    },
   },
   plugins: [
   ],
