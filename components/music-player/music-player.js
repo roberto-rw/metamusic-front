@@ -30,6 +30,7 @@ export class Player extends HTMLElement {
     #fullScreenModeActvated
     #spaceContainer
     #randomButton
+    #randomImg
 
     #originalQueue = []
 
@@ -61,6 +62,7 @@ export class Player extends HTMLElement {
         this.#fullScreenModeActvated = false
         this.#spaceContainer = this.shadowRoot.getElementById('space-cont')
         this.#randomButton = this.shadowRoot.getElementById('random-songs')
+        this.#randomImg = this.shadowRoot.getElementById('random-img')
     }
 
     async connectedCallback() {
@@ -173,13 +175,11 @@ export class Player extends HTMLElement {
 
     #handleRandom() {
         if (this.#random) {
-            console.log('unshuffle')
             this.#random = false
-            this.#randomButton.src = '/random.svg'
+            this.#randomImg.src = '/random.svg'
         } else {
-            console.log('shuffle')
             this.#random = true
-            this.#randomButton.src = '/random-active.svg'
+            this.#randomImg.src = '/random-active.svg'
             this.#shuffleQueue()
         }
     }
