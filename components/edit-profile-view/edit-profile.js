@@ -1,5 +1,6 @@
 import { editUser } from "../../service/userService"
 import { uploadImageProfile } from "../../service/cloudinaryService"
+import page from 'page'
 
 const template = document.createElement('template')
 const html = await (await fetch('../assets/edit-profile.html')).text()
@@ -86,7 +87,9 @@ export class EditProfile extends HTMLElement {
             this.#updateSessionStorage(data);
             this.dispatchEvent(new CustomEvent('userEdited', {
                 bubbles: true
-            }));
+            }))
+
+            page.redirect('/profile')
         } else {
             toast.showToast(data.message, 'error');
         }
